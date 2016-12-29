@@ -1,27 +1,16 @@
-# my-project
+# vue-lab
 
-> A Vue.js project
+> Um incrível experimento da facilidade na utilização do Vue.js (se lê view js)
 
-## Build Setup
+## Suba o ambiente
+
+Inicie o `azk` para subir o ambiente de desenvolvimento e instalar as devidas dependências do projeto:
 
 ``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+azk start && azk logs -f
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Prove
+
+Acesse em seu navegador `http://vue-lab.dev.azk.io/` e veja o experimento em ação.
+
