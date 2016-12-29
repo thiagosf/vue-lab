@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <h1>
-      <i class="material-icons icon-48">account_balance</i>
+      <i class="material-icons rounded-icon icon-48">account_balance</i>
       Register
     </h1>
     <form action="#" id="register" @submit.prevent="sendForm">
@@ -65,8 +65,4 @@ export default {
 .ajax-result.active { display: block; }
 .ajax-result.success { color: green; }
 .ajax-result.error { color: red; }
-.icon-48 {
-  font-size: 48px;
-  vertical-align: middle;
-}
 </style>

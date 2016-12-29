@@ -3,7 +3,7 @@
  */
 // Adds the systems that shape your system
 systems({
-  'my-project': {
+  'vue-lab': {
     // Dependent systems
     depends: [],
     // More images:  http://images.azk.io

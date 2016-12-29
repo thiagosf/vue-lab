@@ -8,6 +8,52 @@
         <hr>
         <div class="mdl-spinner mdl-js-spinner is-active"></div>
         <hr>
+        <h2>Lorem ipsum</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe deleniti, mollitia, accusantium atque suscipit officiis cupiditate doloremque vitae magni ducimus eaque maxime? Aut dicta culpa eligendi voluptatem quaerat iure nesciunt.</p>
+        <div class="mdl-grid mdl-grid-negative">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--order-2-phone">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Welcome 1</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Get Started
+                </a>
+              </div>
+              <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  <i class="material-icons">share</i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-cell--order-1-phone">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Welcome 2</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Get Started
+                </a>
+              </div>
+              <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  <i class="material-icons">share</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
           <thead>
             <tr>
@@ -58,31 +104,22 @@ export default {
 }
 </script>
 
-<style lang="sass">
-  .hello
-    color: blue
-</style>
+<style lang="sass"> @import 'styles'; </style>
 
 <style>
-#app,
-#app button,
-#app input,
-#app textarea,
-#app select,
-#app .mdl-layout__title,
-#app .mdl-layout-title,
-#app h1, h2 {
-  font-family: "Arima Madurai", Helvetica, Arial, sans-serif;
+.demo-card-wide.mdl-card {
+  margin: 0 0 20px 0;
+  width: 100%;
 }
-#app .main-layout-transparent .mdl-layout__header {
-  background: #333;
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url(https://getmdl.io/assets/demos/welcome_card.jpg) center / cover;
 }
-#app .page-content {
-  padding: 20px;
-  max-width: 720px;
-  margin: 0 auto;
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
 }
-#app .mdl-layout-title {
-  font-weight: bold;
+.demo-card-wide .mdl-button--colored {
+  box-shadow: none;
 }
 </style>
