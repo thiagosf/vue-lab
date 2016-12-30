@@ -1,23 +1,28 @@
 <template>
   <header class="mdl-layout__header mdl-layout__header--transparent">
     <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">Vue</span>
-      <!-- Add spacer, to align navigation to the right -->
+      <span class="mdl-layout-title">
+        <router-link  to="/">Vue</router-link>
+      </span>
+      <span v-if="$root.store.name" class="welcome-user">
+        Bem-vindo {{ $root.store.name }}
+      </span>
       <div class="mdl-layout-spacer"></div>
-      <!-- Navigation -->
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Quem somos</a>
-        <a class="mdl-navigation__link" href="">Soluções</a>
-        <a class="mdl-navigation__link" href="">Projetos</a>
-        <a class="mdl-navigation__link" href="">Contato</a>
+      <nav class="mdl-navigation mdl-cell--hide-phone">
+        <router-link class="mdl-navigation__link" v-for="item in nav" :to="item.link">{{ item.label }}</router-link>
       </nav>
     </div>
   </header>
 </template>
 
 <script>
+import nav from '../../helpers/nav'
 export default {
-  name: 'main-header'
+  name: 'main-header',
+  data () {
+    return {
+      nav: nav
+    }
+  }
 }
 </script>

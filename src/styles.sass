@@ -1,23 +1,49 @@
 $font-base: "Raleway", Helvetica, Arial, sans-serif
+$gradient-base: linear-gradient(20deg, #4a148c, #b71c1c) no-repeat center center
+$small-only: "(max-width: 479px)"
+$medium-up: "(min-width: 480px)"
 
 body
   background: white
   font-family: $font-base
+
 h1, h2, input, select, textarea
   font-family: $font-base
+
 @for $i from 1 through 6
   h#{$i}
     font-weight: 900
+    color: black
+    position: relative
+    &.title-with-icon
+      &::before
+        content: ""
+        position: absolute
+        bottom: 3px;
+        left: 83px
+        width: 30px
+        height: 8px
+        background: #ddd
+
 .main-layout-transparent
   .mdl-layout__header
-    background: linear-gradient(20deg, #4a148c, #b71c1c) no-repeat center center
+    background: $gradient-base
     background-size: cover
+    display: block
+
 .page-content
   padding: 20px;
   max-width: 720px;
   margin: 0 auto;
+
 .mdl-layout-title
   font-weight: bold;
+  a
+    color: white
+    text-decoration: none
+    &:hover
+      color: #ccc
+
 .mdl-button
   &.mdl-button--colored
     box-shadow: rgba(black, .2) 0 -4px 0 inset
@@ -36,3 +62,68 @@ h1, h2, input, select, textarea
 .mdl-grid
   &.mdl-grid-negative
     margin: 0 -16px
+
+.mdl-responsive-table-box
+  @media #{$small-only}
+    overflow-x: auto
+    .mdl-data-table
+      width: 100%
+      td
+        white-space: nowrap
+
+.mdl-layout__drawer-button
+  color: white
+
+.mdl-layout__drawer-button
+  @media (min-width: 480px)
+    display: none
+
+.mdl-layout__header-row
+  padding: 0 40px 0 60px
+  @media (min-width: 480px)
+    padding: 0 40px
+
+// Card
+.demo-card-wide.mdl-card
+  margin: 0 0 20px 0
+  width: 100%
+.demo-card-wide > .mdl-card__title
+  color: #fff
+  height: 176px
+  background: url(https://getmdl.io/assets/demos/welcome_card.jpg) center / cover
+.demo-card-wide > .mdl-card__menu
+  color: #fff
+.demo-card-wide .mdl-button--colored
+  box-shadow: none
+
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 200ms, transform 200ms
+  transform: translateY(0px)
+
+.fade-enter,
+.fade-leave-active
+  opacity: 0
+  transform: translateX(-10px)
+
+.mdl-snackbar
+  &.mdl-snackbar-large
+    background: linear-gradient(20deg, #455a64, #78909c) no-repeat center center
+    padding: 15px 20px
+    @media #{$medium-up}
+      padding: 20px 40px
+    .mdl-snackbar__text
+      font-size: 18px
+      line-height: 1.4
+      color: white
+      font-weight: 100
+      font-family: $font-base
+      @media #{$medium-up}
+        font-size: 22px
+
+.mdl-textfield-full
+  width: 100%
+
+.welcome-user
+  display: inline-block
+  margin-left: 20px

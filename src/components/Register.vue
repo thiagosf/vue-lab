@@ -1,15 +1,15 @@
 <template>
   <div class="register">
-    <h1>
-      <i class="material-icons rounded-icon icon-48">account_balance</i>
+    <h1 class="title-with-icon">
+      <i class="material-icons rounded-icon icon-48">assignment_ind</i>
       Register
     </h1>
-    <form action="#" id="register" @submit.prevent="sendForm">
-      <div :class="name_box">
+    <form action="#" @submit.prevent="sendForm">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-full" v-bind:class="{ 'is-invalid': name_error, 'is-dirty': !name_error && name !== null }">
         <input class="mdl-textfield__input" type="text" id="name" name="name" v-model="name">
         <label class="mdl-textfield__label" for="name">Nome</label>
       </div>
-      <div :class="email_box">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-full" v-bind:class="{ 'is-invalid': email_error, 'is-dirty': !email_error && email !== null }">
         <input class="mdl-textfield__input" type="email" id="email" name="email" v-model="email">
         <label class="mdl-textfield__label" for="email">Email</label>
       </div>
@@ -19,12 +19,13 @@
           Enviar
         </button>
       </div>
-      <div :class="ajax_class" v-html="result"></div>
     </form>
   </div>
 </template>
 
 <script>
+import toast from '../helpers/toast'
+import store from '../helpers/store'
 export default {
   name: 'register',
   methods: {
@@ -36,13 +37,13 @@ export default {
           `<strong>${this.name}</strong>, agrademos muito`,
           `<strong>${this.name}</strong> até breve!`
         ]
-        let random = Math.floor(Math.random() * (messages.length - 1))
-        this.ajax_class = 'ajax-result active success'
-        this.result = messages[random]
+        let random = Math.floor(Math.random() * messages.length)
+        toast.show(messages[random], 'success')
+        this.name_error = false
+        store.add('name', this.name)
       } else {
-        this.ajax_class = 'ajax-result active error'
-        this.result = `Por favor, digite os dados completos`
-        this.name_box = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-invalid'
+        toast.show('Por favor, digite os dados completos', 'error')
+        this.name_error = true
       }
     }
   },
@@ -50,19 +51,32 @@ export default {
     return {
       name: null,
       email: null,
-      ajax_class: 'ajax-result',
-      result: null,
-      name_box: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label',
-      email_box: 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
+      name_error: false,
+      email_error: false
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.ajax-result { display: none; margin-top: 20px; }
-.ajax-result.active { display: block; }
-.ajax-result.success { color: green; }
-.ajax-result.error { color: red; }
+<style lang="sass" scoped>
+.ajax-result
+  display: none
+  margin-top: 20px
+.ajax-result.active
+  display: block
+.ajax-result.success
+  color: green
+.ajax-result.error
+  color: red
+.register
+  form
+    background: linear-gradient(20deg, #ddd, #f7f7f7)
+    padding: 30px
+    border-radius: 2px
+    @media (min-width: 480px)
+      margin: 0 auto
+      width: 400px
+    .submit-box
+      text-align: center
 </style>

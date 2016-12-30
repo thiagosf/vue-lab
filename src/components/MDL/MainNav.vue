@@ -2,16 +2,28 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Vue</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Quem somos</a>
-      <a class="mdl-navigation__link" href="">Soluções</a>
-      <a class="mdl-navigation__link" href="">Projetos</a>
-      <a class="mdl-navigation__link" href="">Contato</a>
+      <router-link @click.native="hideNav" class="mdl-navigation__link" v-for="item in nav" :to="item.link">{{ item.label }}</router-link>
     </nav>
+    <div aria-expanded="false" role="button" tabindex="0" class="mdl-layout__drawer-button">
+      <i class="material-icons">more_horiz</i>
+    </div>
   </div>
 </template>
 
 <script>
+import nav from '../../helpers/nav'
 export default {
-  name: 'main-nav'
+  name: 'main-nav',
+  data () {
+    return {
+      nav: nav
+    }
+  },
+  methods: {
+    hideNav (e) {
+      const event = new window.Event('click')
+      document.querySelector('.mdl-layout__drawer-button').dispatchEvent(event)
+    }
+  }
 }
 </script>
