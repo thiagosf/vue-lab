@@ -23,7 +23,7 @@ h1, h2, input, select, textarea
         left: 83px
         width: 30px
         height: 8px
-        background: #ddd
+        background: black
 
 .main-layout-transparent
   .mdl-layout__header
@@ -45,9 +45,10 @@ h1, h2, input, select, textarea
       color: #ccc
 
 .mdl-button
-  &.mdl-button--colored
-    box-shadow: rgba(black, .2) 0 -4px 0 inset
-    border-radius: 2px
+  &:not(.mdl-button--icon)
+    &.mdl-button--colored
+      box-shadow: rgba(black, .2) 0 -4px 0 inset
+      border-radius: 2px
 
 .rounded-icon
   border-radius: 50%

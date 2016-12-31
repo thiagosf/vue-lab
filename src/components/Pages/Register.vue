@@ -1,33 +1,38 @@
 <template>
   <div class="register">
     <h1 class="title-with-icon">
-      <i class="material-icons rounded-icon icon-48">assignment_ind</i>
+      <ui-icon rounded size="48" name="assignment_ind" />
       Register
     </h1>
     <form action="#" @submit.prevent="sendForm">
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-full" v-bind:class="{ 'is-invalid': name_error, 'is-dirty': !name_error && name !== null }">
-        <input class="mdl-textfield__input" type="text" id="name" name="name" v-model="name">
-        <label class="mdl-textfield__label" for="name">Nome</label>
-      </div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-full" v-bind:class="{ 'is-invalid': email_error, 'is-dirty': !email_error && email !== null }">
-        <input class="mdl-textfield__input" type="email" id="email" name="email" v-model="email">
-        <label class="mdl-textfield__label" for="email">Email</label>
-      </div>
+      <ui-field-group :invalid="name_error" :value="name">
+        <ui-text name="name" v-model="name" :value="$root.store.name"></ui-text>
+        <ui-label>Nome</ui-label>
+      </ui-field-group>
+      <ui-field-group :invalid="email_error" :value="email">
+        <ui-text type="email" name="email" v-model="email" :value="$root.store.email"></ui-text>
+        <ui-label>E-mail</ui-label>
+      </ui-field-group>
       <div class="submit-box">
-        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-          <i class="material-icons">send</i>
-          Enviar
-        </button>
+        <ui-button with-icon="send" colored raised :disabled="disabled">Enviar</ui-button>
       </div>
     </form>
+    <ui-button icon="add" type="button" fab big-icon @click.prevent.native="notificate"></ui-button>
   </div>
 </template>
 
 <script>
-import toast from '../helpers/toast'
-import store from '../helpers/store'
+import toast from '../../helpers/toast'
+import store from '../../helpers/store'
+import UiButton from '../Ui/UiButton'
+import UiText from '../Ui/UiText'
+import UiLabel from '../Ui/UiLabel'
+import UiFieldGroup from '../Ui/UiFieldGroup'
+import UiIcon from '../Ui/UiIcon'
+
 export default {
   name: 'register',
+  components: { UiButton, UiText, UiLabel, UiFieldGroup, UiIcon },
   methods: {
     sendForm (e) {
       if (this.name) {
@@ -40,11 +45,17 @@ export default {
         let random = Math.floor(Math.random() * messages.length)
         toast.show(messages[random], 'success')
         this.name_error = false
+        this.disabled = true
         store.add('name', this.name)
+        store.add('email', this.email)
+        setTimeout(() => { this.disabled = false }, 2000)
       } else {
         toast.show('Por favor, digite os dados completos', 'error')
         this.name_error = true
       }
+    },
+    notificate (e) {
+      toast.show('Hello world!')
     }
   },
   data () {
@@ -52,13 +63,13 @@ export default {
       name: null,
       email: null,
       name_error: false,
-      email_error: false
+      email_error: false,
+      disabled: false
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass" scoped>
 .ajax-result
   display: none

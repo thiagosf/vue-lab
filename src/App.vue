@@ -1,39 +1,52 @@
 <template>
   <div id="app" class="app">
-    <main-layout>
-      <main-header></main-header>
-      <main-nav></main-nav>
-      <main-content>
+    <ui-layout>
+      <ui-header></ui-header>
+      <ui-nav></ui-nav>
+      <ui-content>
         <transition name="fade" mode="out-in">
           <router-view></router-view>
         </transition>
         <hr>
         <h3>Store</h3>
-        <pre v-for="item in $root.store">{{ item }}</pre>
+        <ul class="demo-list-icon mdl-list">
+          <li class="mdl-list__item"  v-for="item in $root.store" v-if="item">
+            <span class="mdl-list__item-primary-content">
+              <i class="material-icons mdl-list__item-icon">check</i>
+              {{ item }}
+            </span>
+          </li>
+        </ul>
         <div id="snackbar-message" class="mdl-js-snackbar mdl-snackbar mdl-snackbar-large">
           <div class="mdl-snackbar__text"></div>
           <button class="mdl-snackbar__action" type="button"></button>
         </div>
-      </main-content>
-    </main-layout>
+      </ui-content>
+    </ui-layout>
   </div>
 </template>
 
-<style lang="sass"> @import 'styles'; </style>
+<style lang="sass">
+@import '~material-design-lite/src/color-definitions'
+@import './sass/variables'
+@import '~material-design-lite/src/material-design-lite-grid.scss'
+@import '~material-design-lite/src/material-design-lite.scss'
+@import 'styles'
+</style>
 
 <script>
-import MainLayout from './components/MDL/MainLayout'
-import MainHeader from './components/MDL/MainHeader'
-import MainNav from './components/MDL/MainNav'
-import MainContent from './components/MDL/MainContent'
+import UiLayout from './components/Ui/UiLayout'
+import UiHeader from './components/Ui/UiHeader'
+import UiNav from './components/Ui/UiNav'
+import UiContent from './components/Ui/UiContent'
 
 export default {
   name: 'app',
   components: {
-    MainLayout,
-    MainHeader,
-    MainNav,
-    MainContent
+    UiLayout,
+    UiHeader,
+    UiNav,
+    UiContent
   }
 }
 </script>

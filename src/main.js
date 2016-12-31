@@ -1,10 +1,11 @@
+import 'material-design-lite/material.js'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Home from './components/Home'
-import Register from './components/Register'
-import About from './components/About'
-import Table from './components/Table'
+import Home from './components/Pages/Home'
+import Register from './components/Pages/Register'
+import About from './components/Pages/About'
+import Table from './components/Pages/Table'
 import store from './helpers/store'
 
 Vue.use(VueRouter)
@@ -25,6 +26,12 @@ router.afterEach((to, from) => {
   }, 600)
 })
 
+// Dados iniciais
+const initialData = {
+  name: null,
+  email: null
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
@@ -32,9 +39,7 @@ new Vue({
   components: { App },
   data () {
     return {
-      store: store.connect({
-        name: null
-      })
+      store: store.connect(initialData)
     }
   },
   router
