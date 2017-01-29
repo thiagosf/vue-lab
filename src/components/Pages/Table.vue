@@ -1,9 +1,6 @@
 <template>
   <div class="table">
-    <h1 class="title-with-icon">
-      <i class="material-icons rounded-icon icon-48">apps</i>
-      Table
-    </h1>
+    <ui-title icon="apps">Table</ui-title>
     <div class="mdl-responsive-table-box">
       <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
         <thead>

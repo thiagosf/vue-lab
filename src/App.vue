@@ -10,7 +10,7 @@
         <hr>
         <h3>Store</h3>
         <ul class="demo-list-icon mdl-list">
-          <li class="mdl-list__item"  v-for="item in $root.store" v-if="item">
+          <li class="mdl-list__item"  v-for="item in newsletter" v-if="item">
             <span class="mdl-list__item-primary-content">
               <i class="material-icons mdl-list__item-icon">check</i>
               {{ item }}
@@ -35,6 +35,7 @@
 </style>
 
 <script>
+import { mapGetters } from 'vuex'
 import UiLayout from './components/Ui/UiLayout'
 import UiHeader from './components/Ui/UiHeader'
 import UiNav from './components/Ui/UiNav'
@@ -47,6 +48,11 @@ export default {
     UiHeader,
     UiNav,
     UiContent
+  },
+  computed: {
+    ...mapGetters({
+      newsletter: 'getNewsletter'
+    })
   }
 }
 </script>

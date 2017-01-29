@@ -1,16 +1,13 @@
 <template>
   <div class="register">
-    <h1 class="title-with-icon">
-      <ui-icon rounded size="48" name="assignment_ind" />
-      Register
-    </h1>
+    <ui-title icon="assignment_ind">Register</ui-title>
     <form action="#" @submit.prevent="sendForm">
       <ui-field-group :invalid="name_error" :value="name">
-        <ui-text name="name" v-model="name" :value="$root.store.name"></ui-text>
+        <ui-text name="name" v-model="name" :value="newsletter.name"></ui-text>
         <ui-label>Nome</ui-label>
       </ui-field-group>
       <ui-field-group :invalid="email_error" :value="email">
-        <ui-text type="email" name="email" v-model="email" :value="$root.store.email"></ui-text>
+        <ui-text type="email" name="email" v-model="email" :value="newsletter.email"></ui-text>
         <ui-label>E-mail</ui-label>
       </ui-field-group>
       <div class="submit-box">
@@ -22,8 +19,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import toast from '../../helpers/toast'
-import store from '../../helpers/store'
 import UiButton from '../Ui/UiButton'
 import UiText from '../Ui/UiText'
 import UiLabel from '../Ui/UiLabel'
@@ -33,6 +30,11 @@ import UiIcon from '../Ui/UiIcon'
 export default {
   name: 'register',
   components: { UiButton, UiText, UiLabel, UiFieldGroup, UiIcon },
+  computed: {
+    ...mapGetters({
+      newsletter: 'getNewsletter'
+    })
+  },
   methods: {
     sendForm (e) {
       if (this.name) {
@@ -46,8 +48,7 @@ export default {
         toast.show(messages[random], 'success')
         this.name_error = false
         this.disabled = true
-        store.add('name', this.name)
-        store.add('email', this.email)
+        this.sendNewsletter(this.name, this.email)
         setTimeout(() => { this.disabled = false }, 2000)
       } else {
         toast.show('Por favor, digite os dados completos', 'error')
@@ -56,6 +57,9 @@ export default {
     },
     notificate (e) {
       toast.show('Hello world!')
+    },
+    sendNewsletter (name, email) {
+      this.$store.dispatch('sendNewsletter', { name, email })
     }
   },
   data () {

@@ -6,9 +6,11 @@ import Home from './components/Pages/Home'
 import Register from './components/Pages/Register'
 import About from './components/Pages/About'
 import Table from './components/Pages/Table'
-import store from './helpers/store'
+import store from './store'
+import SimpleUi from './plugins/SimpleUi'
 
 Vue.use(VueRouter)
+Vue.use(SimpleUi)
 
 const router = new VueRouter({
   routes: [
@@ -26,21 +28,11 @@ router.afterEach((to, from) => {
   }, 600)
 })
 
-// Dados iniciais
-const initialData = {
-  name: null,
-  email: null
-}
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
-  data () {
-    return {
-      store: store.connect(initialData)
-    }
-  },
+  store,
   router
 })
