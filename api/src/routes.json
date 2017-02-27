@@ -1,0 +1,24 @@
+{
+  "POST /auth/login": {
+    "success": true,
+    "message": "Login efetuado com sucesso! (1)",
+    "data": {
+      "id": "1",
+      "username": "admin",
+      "password": "123"
+    }
+  },
+  "POST /auth/logout": {
+    "success": true,
+    "message": "Até breve!"
+  },
+  "GET /auth/user": {
+    "success": true,
+    "message": "Login efetuado com sucesso! (2)",
+    "data": {
+      "id": "1",
+      "username": "admin",
+      "password": "123"
+    }
+  }
+}

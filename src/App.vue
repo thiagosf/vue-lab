@@ -1,28 +1,23 @@
 <template>
   <div id="app" class="app">
-    <ui-layout>
-      <ui-header></ui-header>
-      <ui-nav></ui-nav>
-      <ui-content>
-        <transition name="fade" mode="out-in">
-          <router-view></router-view>
-        </transition>
-        <hr>
-        <h3>Store</h3>
-        <ul class="demo-list-icon mdl-list">
-          <li class="mdl-list__item"  v-for="item in newsletter" v-if="item">
-            <span class="mdl-list__item-primary-content">
-              <i class="material-icons mdl-list__item-icon">check</i>
-              {{ item }}
-            </span>
-          </li>
-        </ul>
-        <div id="snackbar-message" class="mdl-js-snackbar mdl-snackbar mdl-snackbar-large">
-          <div class="mdl-snackbar__text"></div>
-          <button class="mdl-snackbar__action" type="button"></button>
-        </div>
-      </ui-content>
-    </ui-layout>
+    <div v-if="ready">
+      <ui-layout>
+        <ui-header v-if="!isLoginRoute()"></ui-header>
+        <ui-nav v-if="!isLoginRoute()"></ui-nav>
+        <ui-content>
+          <transition name="fade" mode="out-in">
+            <router-view></router-view>
+          </transition>
+          <div id="snackbar-message" class="mdl-js-snackbar mdl-snackbar mdl-snackbar-large">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
+          </div>
+        </ui-content>
+      </ui-layout>
+    </div>
+    <div class="spinner-center" v-if="!ready">
+      <div class="mdl-spinner mdl-js-spinner is-active"></div>
+    </div>
   </div>
 </template>
 
@@ -32,6 +27,11 @@
 @import '~material-design-lite/src/material-design-lite-grid.scss'
 @import '~material-design-lite/src/material-design-lite.scss'
 @import 'styles'
+.spinner-center
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
 </style>
 
 <script>
@@ -51,8 +51,22 @@ export default {
   },
   computed: {
     ...mapGetters({
-      newsletter: 'getNewsletter'
+      user: 'getUser',
+      ready: 'getUserReady'
     })
+  },
+  methods: {
+    isLoginRoute () {
+      return this.$route.name === 'login'
+    },
+    checkLogin () {
+      this.$store.dispatch('checkLogin')
+    }
+  },
+  mounted () {
+    if (!this.user.id) {
+      this.checkLogin()
+    }
   }
 }
 </script>

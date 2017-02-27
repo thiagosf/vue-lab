@@ -4,8 +4,8 @@
       <span class="mdl-layout-title">
         <router-link  to="/">Vue</router-link>
       </span>
-      <span v-if="newsletter.name" class="welcome-user">
-        Bem-vindo {{ newsletter.name }}
+      <span v-if="user.id" class="welcome-user">
+        Bem-vindo <strong>{{ user.username }}</strong> (<router-link to={ 'name': 'logout' }>{{ item.label }}</router-link>)
       </span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-cell--hide-phone">
@@ -18,6 +18,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import nav from '../../helpers/nav'
+
 export default {
   name: 'main-header',
   data () {
@@ -27,7 +28,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      newsletter: 'getNewsletter'
+      user: 'getUser'
     })
   }
 }
