@@ -1,0 +1,18 @@
+{
+  "welcome": "Bienvenido <strong>%{name}</strong>",
+  "actions": {
+    "enter": "Entrar"
+  },
+  "models": {
+    "user": {
+      "username": "Nombre de usuário",
+      "password": "Contraseña"
+    }
+  },
+  "pages": {
+    "login": {
+      "title": "Conecte",
+      "tip": "Punta <code>admin:123</code>"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "welcome": "Welcome <strong>%{name}</strong>",
+  "actions": {
+    "enter": "Enter"
+  },
+  "models": {
+    "user": {
+      "username": "Username",
+      "password": "Password"
+    }
+  },
+  "pages": {
+    "login": {
+      "title": "Login",
+      "tip": "Tip <code>admin:123</code>"
+    }
+  }
+}

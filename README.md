@@ -23,4 +23,6 @@ Acesse em seu navegador `http://vue-lab.dev.azk.io/` e veja o experimento em aç
 - [x] Usar Vuex para manipular store
 - [x] Adicionar autenticação
 - [x] Usar ajax
+- [x] I18n
 - [ ] Criar módulos do admin fictícios
+- [ ] Adicionar gráficos

@@ -20,7 +20,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import toast from '../../helpers/toast'
+import { toast } from '../../helpers'
 import UiButton from '../Ui/UiButton'
 import UiText from '../Ui/UiText'
 import UiLabel from '../Ui/UiLabel'

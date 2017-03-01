@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueCookie from 'vue-cookie'
 
+import i18n from './helpers/i18n'
 import App from './App'
 import Home from './components/Pages/Home'
 import Register from './components/Pages/Register'
@@ -19,7 +20,13 @@ Vue.use(SimpleUi)
 Vue.use(VueResource)
 Vue.use(VueCookie)
 
-Vue.http.options.root = 'http://api.dev.azk.io'
+i18n.install()
+
+let apiRoot = 'https://api.vue.thiagosf.net'
+if (process.env.NODE_ENV === 'development') {
+  apiRoot = 'http://api.dev.azk.io'
+}
+Vue.http.options.root = apiRoot
 
 const router = new VueRouter({
   hashbang: false,

@@ -1,37 +1,46 @@
 <template>
   <div class="login">
     <div v-if="ready">
-      <ui-title icon="account_circle">Login</ui-title>
+      <ui-title icon="account_circle">{{ $t('pages.login.title') }}</ui-title>
       <form action="#" @submit.prevent="sendForm">
         <ui-field-group :invalid="username_error" :value="username">
           <ui-text name="username" v-model="username" :value="user.username" required></ui-text>
-          <ui-label>Nome de usuário</ui-label>
+          <ui-label>{{ $t('models.user.username') }}</ui-label>
         </ui-field-group>
         <ui-field-group :invalid="password_error" :value="password">
           <ui-text type="password" name="password" v-model="password" :value="user.password" required></ui-text>
-          <ui-label>Senha</ui-label>
+          <ui-label>{{ $t('models.user.password') }}</ui-label>
         </ui-field-group>
         <div class="submit-box">
           <ui-button with-icon="lock" colored raised :disabled="disabled">
-            Entrar
+            {{ $t('actions.enter') }}
           </ui-button>
         </div>
       </form>
-      <div class="tip">
-        Dica <code>admin:123</code>
+      <div class="languages-box">
+        <a href="#" :class="{ 'active': item.active }" v-if="locales" v-for="item in locales" v-on:click.prevent="setLocale(item.locale)"> {{ item.name }}</a>
       </div>
+      <div class="tip" v-html="$t('pages.login.tip')"></div>
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
 .login
-  max-width: 300px
+  max-width: 350px
   margin: 0 auto
   .submit-box
     text-align: center
   .mdl-textfield__input
     font-size: 36px
+  .languages-box
+    text-align: center
+    margin-top: 40px
+    a
+      display: inline-block
+      margin: 0 10px
+      &.active
+        color: #ccc
 .tip
   margin-top: 20px
   font-size: 12px
@@ -66,7 +75,9 @@ export default {
   components: { UiButton, UiText, UiLabel, UiFieldGroup },
   computed: {
     ...mapGetters({
-      user: 'getUser'
+      user: 'getUser',
+      currentLocale: 'getCurrentLocale',
+      locales: 'getLocales'
     })
   },
   methods: {
@@ -83,6 +94,9 @@ export default {
         this.disabled = false
         errorHandler(error)
       })
+    },
+    setLocale (locale) {
+      this.$store.dispatch('setLocale', locale)
     }
   },
   data () {

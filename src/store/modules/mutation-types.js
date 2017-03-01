@@ -11,3 +11,6 @@ export const LOGOUT = `${prefix}/LOGOUT`
 
 // Notification
 export const NOTIFY = `${prefix}/NOTIFY`
+
+// i18n
+export const SET_LOCALE = `${prefix}/SET_LOCALE`
