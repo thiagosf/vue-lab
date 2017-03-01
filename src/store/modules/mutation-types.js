@@ -1,3 +1,13 @@
-export const SEND_NEWSLETTER = 'vuelab/SEND_NEWSLETTER'
-export const LOGIN = 'vuelab/LOGIN'
-export const CHECK_LOGIN = 'vuelab/CHECK_LOGIN'
+const prefix = 'vuelab'
+
+// Newsletter
+export const SEND_NEWSLETTER = `${prefix}/SEND_NEWSLETTER`
+
+// Auth
+export const LOGIN = `${prefix}/LOGIN`
+export const SUCCESS_TOKEN = `${prefix}/SUCCESS_TOKEN`
+export const INVALID_TOKEN = `${prefix}/INVALID_TOKEN`
+export const LOGOUT = `${prefix}/LOGOUT`
+
+// Notification
+export const NOTIFY = `${prefix}/NOTIFY`

@@ -1,9 +1,9 @@
 <template>
   <div id="app" class="app">
     <div v-if="ready">
-      <ui-layout>
-        <ui-header v-if="!isLoginRoute()"></ui-header>
-        <ui-nav v-if="!isLoginRoute()"></ui-nav>
+      <ui-layout :class="{ 'login-page': isLoginRoute() }">
+        <ui-header></ui-header>
+        <ui-nav></ui-nav>
         <ui-content>
           <transition name="fade" mode="out-in">
             <router-view></router-view>
@@ -55,18 +55,32 @@ export default {
       ready: 'getUserReady'
     })
   },
+  created () {
+    this.$on('login', (user) => {
+      this.$router.push({
+        name: this.$route.query.redirect || 'home'
+      })
+    })
+  },
   methods: {
     isLoginRoute () {
       return this.$route.name === 'login'
     },
     checkLogin () {
-      this.$store.dispatch('checkLogin')
+      this.$store.dispatch('checkLogin', (error) => {
+        if (error) throw new Error(error)
+      })
     }
   },
   mounted () {
     if (!this.user.id) {
       this.checkLogin()
     }
+  },
+  updated () {
+    setTimeout(() => {
+      window.componentHandler.upgradeDom()
+    }, 500)
   }
 }
 </script>

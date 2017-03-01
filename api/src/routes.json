@@ -1,16 +1,17 @@
 {
-  "POST /auth/login": {
-    "success": true,
-    "message": "Login efetuado com sucesso! (1)",
-    "data": {
-      "id": "1",
-      "username": "admin",
-      "password": "123"
-    }
-  },
   "POST /auth/logout": {
     "success": true,
     "message": "Até breve!"
+  },
+  "POST /auth/token": {
+    "success": true,
+    "message": "Token válido!",
+    "data": {
+      "id": "1",
+      "username": "admin",
+      "password": "123",
+      "token": "a1s2d3f4"
+    }
   },
   "GET /auth/user": {
     "success": true,
@@ -18,7 +19,8 @@
     "data": {
       "id": "1",
       "username": "admin",
-      "password": "123"
+      "password": "123",
+      "token": "a1s2d3f4"
     }
   }
 }

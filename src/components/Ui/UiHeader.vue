@@ -5,7 +5,7 @@
         <router-link  to="/">Vue</router-link>
       </span>
       <span v-if="user.id" class="welcome-user">
-        Bem-vindo <strong>{{ user.username }}</strong> (<router-link to={ 'name': 'logout' }>{{ item.label }}</router-link>)
+        Bem-vindo <strong>{{ user.username }}</strong> (<router-link :to="{ name: 'logout' }">sair</router-link>)
       </span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-cell--hide-phone">

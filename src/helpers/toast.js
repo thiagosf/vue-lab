@@ -8,10 +8,12 @@ export default {
   show (message, type = 'error', timeout = 2000) {
     message = message.replace(/(<([^>]+)>)/ig, '')
     let snackbar = document.querySelector('#snackbar-message')
-    if (snackbar.className.indexOf('mdl-snackbar--active') === -1) {
-      snackbar.MaterialSnackbar.showSnackbar({ message, timeout })
-    } else {
-      snackbar.MaterialSnackbar.setMessage(message)
+    if (snackbar.MaterialSnackbar) {
+      if (snackbar.className.indexOf('mdl-snackbar--active') === -1) {
+        snackbar.MaterialSnackbar.showSnackbar({ message, timeout })
+      } else {
+        snackbar.MaterialSnackbar.setMessage(message)
+      }
     }
   }
 }

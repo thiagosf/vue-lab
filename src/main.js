@@ -2,32 +2,24 @@ import 'material-design-lite/material.js'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import VueCookie from 'vue-cookie'
+
 import App from './App'
 import Home from './components/Pages/Home'
 import Register from './components/Pages/Register'
 import About from './components/Pages/About'
 import Table from './components/Pages/Table'
 import Login from './components/Pages/Login'
+import PageNotFound from './components/Pages/PageNotFound'
 import store from './store'
 import SimpleUi from './plugins/SimpleUi'
-import auth from './helpers/auth'
 
 Vue.use(VueRouter)
 Vue.use(SimpleUi)
 Vue.use(VueResource)
+Vue.use(VueCookie)
 
 Vue.http.options.root = 'http://api.dev.azk.io'
-
-const requireAuth = (to, from, next) => {
-  if (!auth.loggedIn()) {
-    next({
-      name: 'login',
-      query: { redirect: to.name }
-    })
-  } else {
-    next()
-  }
-}
 
 const router = new VueRouter({
   hashbang: false,
@@ -37,7 +29,8 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -48,37 +41,52 @@ const router = new VueRouter({
       path: '/logout',
       name: 'logout',
       beforeEnter (to, from, next) {
-        auth.logout()
-        next('/')
+        store.dispatch('logout')
+        next({ name: 'login' })
       }
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
-      beforeEnter: requireAuth
+      meta: { requiresAuth: true }
     },
     {
       path: '/about',
       name: 'about',
       component: About,
-      beforeEnter: requireAuth
+      meta: { requiresAuth: true }
     },
     {
       path: '/table',
       name: 'table',
       component: Table,
-      beforeEnter: requireAuth
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '*',
+      component: PageNotFound,
+      meta: { requiresAuth: true }
     }
   ]
 })
 
-router.afterEach((to, from) => {
-  setTimeout(() => {
-    window.componentHandler.upgradeDom()
-  }, 600)
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.loggedIn) {
+      next({
+        name: 'login',
+        query: { redirect: to.name }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
+Vue.router = router
 App.store = store
-App.router = router
+App.router = Vue.router
 new Vue(App).$mount('#app')
