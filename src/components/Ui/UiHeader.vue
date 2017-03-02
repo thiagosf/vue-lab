@@ -4,7 +4,7 @@
       <span class="mdl-layout-title">
         <router-link  to="/">Vue</router-link>
       </span>
-      <span v-if="user.id" class="welcome-user">
+      <span v-if="loggedIn" class="welcome-user">
         <span v-html="$t('welcome', { name: user.username })"></span> (<router-link :to="{ name: 'logout' }">sair</router-link>)
       </span>
       <div class="mdl-layout-spacer"></div>
@@ -41,6 +41,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      loggedIn: 'loggedIn',
       user: 'getUser',
       currentLocale: 'getCurrentLocale',
       locales: 'getLocales'

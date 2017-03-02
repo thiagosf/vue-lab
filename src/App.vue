@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'getUser',
+      loggedIn: 'loggedIn',
       ready: 'getUserReady'
     })
   },
@@ -67,13 +67,11 @@ export default {
       return this.$route.name === 'login'
     },
     checkLogin () {
-      this.$store.dispatch('checkLogin', (error) => {
-        if (error) throw new Error(error)
-      })
+      this.$store.dispatch('checkLogin')
     }
   },
   mounted () {
-    if (!this.user.id) {
+    if (!this.loggedIn) {
       this.checkLogin()
     }
   },

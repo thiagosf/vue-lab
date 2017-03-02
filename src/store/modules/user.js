@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import eventManager from '../../helpers/event_manager'
+import { eventManager } from '../../helpers'
 import * as types from './mutation-types'
 
 const state = {
@@ -38,7 +38,7 @@ const actions = {
         }
       })
   },
-  checkLogin: ({ commit }, callback) => {
+  checkLogin: ({ commit }) => {
     let token = Vue.cookie.get('token')
     if (token) {
       let body = { token: token }
@@ -51,11 +51,9 @@ const actions = {
           } else {
             commit(types.INVALID_TOKEN)
           }
-          callback()
         })
-        .catch((error) => {
+        .catch(() => {
           commit(types.INVALID_TOKEN)
-          callback(error)
         })
     } else {
       commit(types.INVALID_TOKEN)
