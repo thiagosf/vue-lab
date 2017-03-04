@@ -1,8 +1,3 @@
-$font-base: "Raleway", Helvetica, Arial, sans-serif
-$gradient-base: linear-gradient(20deg, #4a148c, #b71c1c) no-repeat center center
-$small-only: "(max-width: 479px)"
-$medium-up: "(min-width: 480px)"
-
 body
   background: white
   font-family: $font-base
@@ -93,44 +88,6 @@ h1, h2, input, select, textarea
   @media (min-width: 480px)
     padding: 0 40px
 
-// Card
-.demo-card-wide.mdl-card
-  margin: 0 0 20px 0
-  width: 100%
-.demo-card-wide > .mdl-card__title
-  color: #fff
-  height: 176px
-  background: url(https://getmdl.io/assets/demos/welcome_card.jpg) center / cover
-.demo-card-wide > .mdl-card__menu
-  color: #fff
-.demo-card-wide .mdl-button--colored
-  box-shadow: none
-
-.fade-enter-active,
-.fade-leave-active
-  transition: opacity 200ms, transform 200ms
-  transform: translateY(0px)
-
-.fade-enter,
-.fade-leave-active
-  opacity: 0
-  transform: translateX(-10px)
-
-.mdl-snackbar
-  &.mdl-snackbar-large
-    background: linear-gradient(20deg, #455a64, #78909c) no-repeat center center
-    padding: 15px 20px
-    @media #{$medium-up}
-      padding: 20px 40px
-    .mdl-snackbar__text
-      font-size: 18px
-      line-height: 1.4
-      color: white
-      font-weight: 100
-      font-family: $font-base
-      @media #{$medium-up}
-        font-size: 22px
-
 .mdl-textfield-full
   width: 100%
 
@@ -141,3 +98,9 @@ h1, h2, input, select, textarea
 .language-item-mobile
   &.active
     opacity: .4
+
+.spinner-center
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)

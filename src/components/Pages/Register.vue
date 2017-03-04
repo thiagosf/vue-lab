@@ -1,19 +1,31 @@
 <template>
   <div class="register">
     <ui-title icon="assignment_ind">Register</ui-title>
-    <form action="#" @submit.prevent="sendForm">
-      <ui-field-group :invalid="name_error" :value="name">
-        <ui-text name="name" v-model="name" :value="newsletter.name"></ui-text>
-        <ui-label>Nome</ui-label>
-      </ui-field-group>
-      <ui-field-group :invalid="email_error" :value="email">
-        <ui-text type="email" name="email" v-model="email" :value="newsletter.email"></ui-text>
-        <ui-label>E-mail</ui-label>
-      </ui-field-group>
-      <div class="submit-box">
-        <ui-button with-icon="send" colored raised :disabled="disabled">Enviar</ui-button>
+    <div :class="{ 'flip-container': true, 'flipped': success }">
+      <div class="flipper">
+        <div class="front">
+          <form action="#" @submit.prevent="sendForm">
+            <ui-field-group :invalid="name_error" :value="name">
+              <ui-text name="name" v-model="name" :value="newsletter.name"></ui-text>
+              <ui-label>Nome</ui-label>
+            </ui-field-group>
+            <ui-field-group :invalid="email_error" :value="email">
+              <ui-text type="email" name="email" v-model="email" :value="newsletter.email"></ui-text>
+              <ui-label>E-mail</ui-label>
+            </ui-field-group>
+            <div class="submit-box">
+              <ui-button with-icon="send" colored raised :disabled="disabled">Enviar</ui-button>
+            </div>
+          </form>
+        </div>
+        <div class="back">
+          <div class="message-box">
+            <p v-html="message"></p>
+          </div>
+          <ui-button icon="chevron_left" type="button" primary fab big-icon @click.prevent.native="cleanForm"></ui-button>
+        </div>
       </div>
-    </form>
+    </div>
     <ui-button icon="add" type="button" fab big-icon @click.prevent.native="notificate"></ui-button>
   </div>
 </template>
@@ -45,11 +57,18 @@ export default {
           `<strong>${this.name}</strong> até breve!`
         ]
         let random = Math.floor(Math.random() * messages.length)
-        toast.show(messages[random], 'success')
+        let message = messages[random]
+
         this.name_error = false
         this.disabled = true
+        this.success = true
+        this.message = message
+        toast.show(this.message, 'success')
         this.sendNewsletter(this.name, this.email)
-        setTimeout(() => { this.disabled = false }, 2000)
+
+        setTimeout(() => {
+          this.disabled = false
+        }, 2000)
       } else {
         toast.show('Por favor, digite os dados completos', 'error')
         this.name_error = true
@@ -60,6 +79,9 @@ export default {
     },
     sendNewsletter (name, email) {
       this.$store.dispatch('sendNewsletter', { name, email })
+    },
+    cleanForm () {
+      this.success = false
     }
   },
   data () {
@@ -68,7 +90,9 @@ export default {
       email: null,
       name_error: false,
       email_error: false,
-      disabled: false
+      disabled: false,
+      success: false,
+      message: null
     }
   }
 }
@@ -86,12 +110,54 @@ export default {
   color: red
 .register
   form
-    background: linear-gradient(20deg, #ddd, #f7f7f7)
     padding: 30px
-    border-radius: 2px
     @media (min-width: 480px)
       margin: 0 auto
       width: 400px
     .submit-box
       text-align: center
+
+// flipper
+.flip-container,
+.front,
+.back
+  width: 100%
+  height: 240px
+
+.flip-container
+  perspective: 1000px
+  margin: 0 auto 40px auto
+  &.flipped
+    .flipper
+      transform: rotateY(180deg)
+.flipper
+  transition: 900ms
+  transform-style: preserve-3d
+  position: relative
+.front,
+.back
+  backface-visibility: hidden
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 2
+  border-radius: 2px
+.front
+  transform: rotateY(0deg)
+  background: linear-gradient(20deg, #ddd, #f7f7f7)
+.back
+  transform: rotateY(180deg)
+  background: linear-gradient(20deg, #555, #111)
+  button
+    position: absolute
+    bottom: 30px
+    left: 30px
+
+.message-box
+  padding: 30px
+  color: white
+  p
+    margin: 0 0 20px 0
+    font-size: 28px
+
 </style>

@@ -4,6 +4,7 @@ import user from './modules/user'
 import newsletter from './modules/newsletter'
 import notification from './modules/notification'
 import i18n from './modules/i18n'
+import transition from './modules/transition'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     user,
     newsletter,
     notification,
-    i18n
+    i18n,
+    transition
   ]
 })

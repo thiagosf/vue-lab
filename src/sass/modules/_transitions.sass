@@ -1,0 +1,85 @@
+// Settings
+$transition-settings: all 300ms
+$translate-displacement: 30px
+$scale-in: .07
+$scale-out: .07
+
+// Fade-left
+.fade-left-enter-active,
+.fade-left-leave-active,
+.fade-left-enter,
+.fade-left-leave
+  transition: $transition-settings
+
+.fade-left-leave
+  opacity: 1
+  transform: translateX(0px)
+.fade-left-leave-active
+  opacity: 0
+  transform: translateX(-($translate-displacement))
+.fade-left-enter
+  opacity: 0
+  transform: translateX($translate-displacement)
+.fade-left-enter-active
+  opacity: 1
+  transform: translateX(0px)
+
+// Fade-right
+.fade-right-enter-active,
+.fade-right-leave-active,
+.fade-right-enter,
+.fade-right-leave
+  transition: $transition-settings
+
+.fade-right-leave
+  opacity: 1
+  transform: translateX(0px)
+.fade-right-leave-active
+  opacity: 0
+  transform: translateX($translate-displacement)
+.fade-right-enter
+  opacity: 0
+  transform: translateX(-($translate-displacement))
+.fade-right-enter-active
+  opacity: 1
+  transform: translateX(0px)
+
+// Scale in
+.scale-in-enter,
+.scale-in-enter-active,
+.scale-in-leave,
+.scale-in-leave-active
+  transition: $transition-settings
+
+.scale-in-enter
+  opacity: 0
+  transform: scale(1 - $scale-in)
+.scale-in-enter-active
+  opacity: 1
+  transform: scale(1)
+.scale-in-leave
+  opacity: 1
+  transform: scale(1)
+.scale-in-leave-active
+  opacity: 0
+  transform: scale(1 + $scale-in)
+
+// Scale-out
+.scale-out-enter,
+.scale-out-enter-active,
+.scale-out-leave,
+.scale-out-leave-active
+  transition: $transition-settings
+
+.scale-out-enter
+  opacity: 0
+  transform: scale(1 + $scale-out)
+.scale-out-enter-active
+  opacity: 1
+  transform: scale(1)
+.scale-out-leave
+  opacity: 1
+  transform: scale(1)
+.scale-out-leave-active
+  opacity: 0
+  transform: scale(1 - $scale-out)

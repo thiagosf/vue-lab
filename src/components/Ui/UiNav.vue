@@ -4,7 +4,7 @@
     <nav class="mdl-navigation">
       <router-link @click.native="hideNav" class="mdl-navigation__link" v-for="item in nav" :to="item.link">{{ item.label }}</router-link>
       <hr>
-      <a href="#" :class="{ 'mdl-navigation__link': true, 'language-item-mobile': true, 'active': item.active }" v-if="locales" v-for="item in locales" v-on:click.prevent="setLocale(item.locale)">
+      <a href="#" :class="{ 'mdl-navigation__link': true, 'language-item-mobile': true, 'active': item.active }" v-if="locales" v-for="item in locales" @click.prevent="setLocale(item.locale)">
         {{ item.name }}
       </a>
     </nav>

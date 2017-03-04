@@ -5,7 +5,11 @@
         <ui-header></ui-header>
         <ui-nav></ui-nav>
         <ui-content>
-          <transition name="fade" mode="out-in">
+          <transition
+            :name="transitionName"
+            :mode="transitionMode"
+            v-on:enter="enter"
+            >
             <router-view></router-view>
           </transition>
           <div id="snackbar-message" class="mdl-js-snackbar mdl-snackbar mdl-snackbar-large">
@@ -22,16 +26,7 @@
 </template>
 
 <style lang="sass">
-@import '~material-design-lite/src/color-definitions'
-@import './sass/variables'
-@import '~material-design-lite/src/material-design-lite-grid.scss'
-@import '~material-design-lite/src/material-design-lite.scss'
-@import 'styles'
-.spinner-center
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -50%)
+@import 'sass/styles'
 </style>
 
 <script>
@@ -52,7 +47,9 @@ export default {
   computed: {
     ...mapGetters({
       loggedIn: 'loggedIn',
-      ready: 'getUserReady'
+      ready: 'getUserReady',
+      transitionName: 'getTransitionName',
+      transitionMode: 'getTransitionMode'
     })
   },
   created () {
@@ -62,23 +59,27 @@ export default {
       })
     })
   },
-  methods: {
-    isLoginRoute () {
-      return this.$route.name === 'login'
-    },
-    checkLogin () {
-      this.$store.dispatch('checkLogin')
-    }
-  },
   mounted () {
     if (!this.loggedIn) {
       this.checkLogin()
     }
   },
   updated () {
-    setTimeout(() => {
+    this.upgradeDom()
+  },
+  methods: {
+    isLoginRoute () {
+      return this.$route.name === 'login'
+    },
+    checkLogin () {
+      this.$store.dispatch('checkLogin')
+    },
+    enter (el) {
+      this.upgradeDom()
+    },
+    upgradeDom () {
       window.componentHandler.upgradeDom()
-    }, 500)
+    }
   }
 }
 </script>

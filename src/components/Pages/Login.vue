@@ -18,7 +18,7 @@
         </div>
       </form>
       <div class="languages-box">
-        <a href="#" :class="{ 'active': item.active }" v-if="locales" v-for="item in locales" v-on:click.prevent="setLocale(item.locale)"> {{ item.name }}</a>
+        <a href="#" :class="{ 'active': item.active }" v-if="locales" v-for="item in locales" @click.prevent="setLocale(item.locale)"> {{ item.name }}</a>
       </div>
       <div class="tip" v-html="$t('pages.login.tip')"></div>
     </div>

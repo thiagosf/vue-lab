@@ -11,13 +11,22 @@
       <nav class="mdl-navigation mdl-cell--hide-phone">
         <router-link class="mdl-navigation__link" v-for="item in nav" :to="item.link">{{ item.label }}</router-link>
       </nav>
-      <a id="languages-menu" class="mdl-navigation__link mdl-cell--hide-phone" href="#" v-on:click.prevent>
+      <a id="languages-menu" class="mdl-navigation__link mdl-cell--hide-phone" href="#" @click.prevent>
         <ui-icon name="language"></ui-icon>
         {{currentLocale.name}}
       </a>
       <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-cell--hide-phone" for="languages-menu">
         <li :class="{ 'mdl-menu__item': true, 'active': item.active }" v-if="locales" v-for="item in locales">
-          <span v-on:click.prevent="setLocale(item.locale)"> {{ item.name }}</span>
+          <span @click.prevent="setLocale(item.locale)"> {{ item.name }}</span>
+        </li>
+      </ul>
+      <a id="transition-names" class="mdl-navigation__link mdl-cell--hide-phone" href="#" @click.prevent>
+        <ui-icon name="build"></ui-icon>
+        {{transitionName}}
+      </a>
+      <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-cell--hide-phone" for="transition-names">
+        <li :class="{ 'mdl-menu__item': true, 'active': item.active }" v-if="transitionNames" v-for="item in transitionNames" @click.prevent="setTransitionName(item)">
+          {{ item }}
         </li>
       </ul>
     </div>
@@ -44,12 +53,17 @@ export default {
       loggedIn: 'loggedIn',
       user: 'getUser',
       currentLocale: 'getCurrentLocale',
-      locales: 'getLocales'
+      locales: 'getLocales',
+      transitionName: 'getTransitionName',
+      transitionNames: 'getTransitionNames'
     })
   },
   methods: {
     setLocale (locale) {
       this.$store.dispatch('setLocale', locale)
+    },
+    setTransitionName (name) {
+      this.$store.dispatch('setTransitionName', name)
     }
   }
 }
