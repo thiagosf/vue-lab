@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 Vue.http.options.root = apiRoot
 
 const router = new VueRouter({
-  hashbang: false,
+  hashbang: true,
   mode: 'history',
   base: __dirname,
   routes: [
