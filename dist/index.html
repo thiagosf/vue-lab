@@ -1,46 +1,8 @@
-<!DOCTYPE html><html lang=pt-br><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>vue-lab</title><style type=text/css rel=stylesheet media=all>body.loading {
-        background: linear-gradient(10deg, #37474f, #546e7a);
-        transition: all 500ms;
-        margin: 0;
-      }
-      body.loading .app {
-        opacity: 0;
-        transition: all 400ms 100ms;
-      }
-      body.loading .spa-loader-box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        display: block;
-        transition: all 500ms;
-      }
-      body.loading .spa-loader-box .logo-box {
-        font-weight: 300;
-        font-size: 16px;
-        line-height: 1;
-        margin: 0 0 30px 0;
-        color: #ccc;
-      }
-      body.loading .spa-loader-box .mdl-spinner {
-        width: 48px;
-        height: 48px;
-      }
-      body.loading.hide-loading {
-        background: white;
-      }
-      body.loading.hide-loading .spa-loader-box {
-        opacity: 0;
-      }
-      body.loading.hide-loading .app {
-        opacity: 1;
-      }
-      .spa-loader-box {
-        display: none;
-      }</style><script>window.onload = function () {
-        document.querySelector('body').className = 'loading hide-loading'
+<!DOCTYPE html><html lang=pt-br><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>vue-lab</title><link rel=stylesheet href=/static/css/preloader.css><script>window.onload = function () {
         setTimeout(function () {
-          document.querySelector('body').className = ''
-        }, 500)
-      }</script><link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons"><link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" rel=stylesheet><link href=/static/css/app.ed9b2ddaf66917f84b5b6395210b576a.css rel=stylesheet></head><body class=loading><div class=spa-loader-box><div class=logo-box>vue-lab</div><div class="mdl-spinner mdl-js-spinner is-active"></div></div><div id=app></div><script type=text/javascript src=/static/js/manifest.17368fcc2f109f7f6cef.js></script><script type=text/javascript src=/static/js/vendor.79d597988696d133808e.js></script><script type=text/javascript src=/static/js/app.c61497903303d67745e7.js></script></body></html>
+          document.querySelector('body').className = 'loading hide-loading'
+          setTimeout(function () {
+            document.querySelector('body').className = ''
+          }, 500)
+        }, 1000)
+      }</script><link rel=stylesheet href="https://fonts.googleapis.com/icon?family=Material+Icons"><link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" rel=stylesheet><link href=/static/css/app.6b11957466600163c3ef09643699df1d.css rel=stylesheet></head><body class=loading><div class=spa-loader-box><div class=logo-box>vue-lab</div><div class="mdl-spinner mdl-js-spinner is-active"></div></div><div id=app></div><script type=text/javascript src=/static/js/manifest.41371fc1146081401f55.js></script><script type=text/javascript src=/static/js/vendor.aa0f7ba152755c48ddbc.js></script><script type=text/javascript src=/static/js/app.5e872b963a1f50583c92.js></script></body></html>

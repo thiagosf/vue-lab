@@ -1,0 +1,41 @@
+body.loading {
+  background: linear-gradient(10deg, #37474f, #546e7a);
+  transition: all 500ms;
+  margin: 0;
+}
+body.loading .app {
+  opacity: 0;
+  transition: all 400ms 100ms;
+}
+body.loading .spa-loader-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: block;
+  transition: all 500ms;
+}
+body.loading .spa-loader-box .logo-box {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1;
+  margin: 0 0 30px 0;
+  color: #ccc;
+}
+body.loading .spa-loader-box .mdl-spinner {
+  width: 48px;
+  height: 48px;
+}
+body.loading.hide-loading {
+  background: white;
+}
+body.loading.hide-loading .spa-loader-box {
+  opacity: 0;
+}
+body.loading.hide-loading .app {
+  opacity: 1;
+}
+.spa-loader-box {
+  display: none;
+}

@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 
 const state = {
-  transitionName: 'fade-left',
+  transitionName: 'scale-out',
   transitionMode: 'out-in',
   transitionNames: [
     'fade-left',

@@ -19,9 +19,6 @@
         </ui-content>
       </ui-layout>
     </div>
-    <div class="spinner-center" v-if="!ready">
-      <div class="mdl-spinner mdl-js-spinner is-active"></div>
-    </div>
   </div>
 </template>
 
