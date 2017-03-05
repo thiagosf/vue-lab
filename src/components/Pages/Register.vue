@@ -33,14 +33,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import { toast } from '../../helpers'
-import UiButton from '../Ui/UiButton'
-import UiText from '../Ui/UiText'
-import UiLabel from '../Ui/UiLabel'
-import UiFieldGroup from '../Ui/UiFieldGroup'
-import UiIcon from '../Ui/UiIcon'
+import { UiButton, UiText, UiLabel, UiFieldGroup, UiIcon } from '../Ui'
 
 export default {
   name: 'register',
+  title: 'Register',
   components: { UiButton, UiText, UiLabel, UiFieldGroup, UiIcon },
   computed: {
     ...mapGetters({

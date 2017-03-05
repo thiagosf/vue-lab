@@ -72,6 +72,7 @@ import UiFieldGroup from '../Ui/UiFieldGroup'
 
 export default {
   name: 'login',
+  title: 'Login',
   components: { UiButton, UiText, UiLabel, UiFieldGroup },
   computed: {
     ...mapGetters({

@@ -1,6 +1,7 @@
 import UiIcon from '../components/Ui/UiIcon'
 
 const SimpleUi = {
+  version: '1.0.0',
   install: function (Vue, options) {
     Vue.component('ui-title', {
       template: '<h1 :class="cssClasses"><ui-icon v-if="icon" rounded size="48" :name="icon" /> <slot></slot></h1>',

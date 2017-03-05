@@ -6,19 +6,22 @@ import VueCookie from 'vue-cookie'
 
 import i18n from './helpers/i18n'
 import App from './App'
-import Home from './components/Pages/Home'
-import Register from './components/Pages/Register'
-import About from './components/Pages/About'
-import Table from './components/Pages/Table'
-import Login from './components/Pages/Login'
-import PageNotFound from './components/Pages/PageNotFound'
+import * as AllPages from './components/Pages'
+import * as Post from './components/Modules/Post'
 import store from './store'
 import SimpleUi from './plugins/SimpleUi'
+import Breadcrumbs from './plugins/Breadcrumbs'
+import DocumentTitle from './plugins/DocumentTitle'
 
 Vue.use(VueRouter)
 Vue.use(SimpleUi)
 Vue.use(VueResource)
 Vue.use(VueCookie)
+Vue.use(Breadcrumbs)
+Vue.use(DocumentTitle, {
+  mainTitle: 'vue-lab',
+  separator: ` ${String.fromCharCode('9749')} `
+})
 
 i18n.install()
 
@@ -36,13 +39,13 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: AllPages.Home,
       meta: { requiresAuth: true }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: AllPages.Login
     },
     {
       path: '/logout',
@@ -55,24 +58,42 @@ const router = new VueRouter({
     {
       path: '/register',
       name: 'register',
-      component: Register,
+      component: AllPages.Register,
       meta: { requiresAuth: true }
     },
     {
       path: '/about',
       name: 'about',
-      component: About,
+      component: AllPages.About,
       meta: { requiresAuth: true }
     },
     {
       path: '/table',
       name: 'table',
-      component: Table,
+      component: AllPages.Table,
       meta: { requiresAuth: true }
     },
     {
+      path: '/posts',
+      component: Post.Post,
+      meta: { requiresAuth: true, alias: 'posts' },
+      children: [{
+        path: '',
+        name: 'posts',
+        component: Post.PostList
+      }, {
+        path: 'new',
+        name: 'new-post',
+        component: Post.NewPost
+      }, {
+        path: ':id/edit',
+        name: 'edit-post',
+        component: Post.EditPost
+      }]
+    },
+    {
       path: '*',
-      component: PageNotFound,
+      component: AllPages.PageNotFound,
       meta: { requiresAuth: true }
     }
   ]

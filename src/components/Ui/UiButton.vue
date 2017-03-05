@@ -1,9 +1,5 @@
 <template>
-  <button class="mdl-button mdl-js-button"
-    :type="type"
-    :class="cssClasses"
-    :disabled="disabled"
-    >
+  <button :type="type" :class="cssClasses" :disabled="disabled">
     <i class="material-icons" v-if="isWithIconSpecified" >{{ withIcon }}</i>
     <slot>
       <i class="material-icons" v-if="isIconSpecified" >{{ icon }}</i>
@@ -19,6 +15,7 @@ export default {
   computed: {
     cssClasses () {
       return {
+        'mdl-button': true,
         'mdl-button--icon': this.icon && !this.bigIcon,
         'mdl-button--accent': this.accent,
         'mdl-button--primary': this.primary,

@@ -4,6 +4,20 @@ $translate-displacement: 30px
 $scale-in: .07
 $scale-out: .07
 
+// Fade
+.fade-enter-active,
+.fade-leave-active,
+.fade-enter,
+.fade-leave
+  transition: $transition-settings
+
+.fade-leave,
+.fade-enter-active
+  opacity: 1
+.fade-leave-active,
+.fade-enter
+  opacity: 0
+
 // Fade-left
 .fade-left-enter-active,
 .fade-left-leave-active,

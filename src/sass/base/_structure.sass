@@ -27,10 +27,19 @@ h1, h2, input, select, textarea
     display: block
     transition: all 200ms
     transform: translateY(0%)
+  .mdl-layout__content
+    transition: margin 200ms
   &.login-page
     .mdl-layout__header,
     .mdl-layout__drawer-button
       transform: translateY(-100%)
+    .mdl-layout__content
+      overflow: initial
+      margin-top: -55px
+    .breadcrumbs
+      opacity: 0
+      height: 0px
+      transform: scale(1, 0)
 
 .page-content
   padding: 20px;
@@ -103,3 +112,53 @@ h1, h2, input, select, textarea
   top: 50%
   left: 50%
   transform: translate(-50%, -50%)
+
+.table-fluid
+  width: 100%
+
+.table-break-word
+  white-space: initial
+
+nav.breadcrumbs
+  transition: all 300ms 100ms
+  margin: 0 0 20px 0
+  opacity: 1
+  height: 50px
+  transform: scale(1, 1)
+  ul
+    list-style: none
+    padding: 0
+    margin: 0
+    background: #eee
+    border-radius: 4px
+    padding: 10px 20px
+    border-bottom: 2px solid #ddd
+    li
+      display: inline-block
+      margin: 0 10px 0 0
+      text-transform: uppercase
+      font-size: 11px
+      font-weight: bold
+      &::after
+        content: "/"
+        display: inline-block
+        margin: 0 0 0 10px
+        color: #ccc
+      &:last-child
+        &::after
+          display: none
+      a
+        display: inline-block
+        color: #777
+        text-decoration: none
+        font-weight: bold
+      &.active
+        color: #aaa
+
+.td-actions
+  text-align: right
+  white-space: nowrap
+  button
+    margin-left: 10px
+    .material-icons
+      font-size: 16px

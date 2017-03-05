@@ -9,7 +9,7 @@
       </span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-cell--hide-phone">
-        <router-link class="mdl-navigation__link" v-for="item in nav" :to="item.link">{{ item.label }}</router-link>
+        <router-link class="mdl-navigation__link" v-for="item in nav" :to="{ name: item.name }">{{ item.label }}</router-link>
       </nav>
       <a id="languages-menu" class="mdl-navigation__link mdl-cell--hide-phone" href="#" @click.prevent>
         <ui-icon name="language"></ui-icon>
@@ -35,16 +35,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import nav from '../../helpers/nav'
 import UiIcon from '../../components/Ui/UiIcon'
 
 export default {
   name: 'main-header',
-  data () {
-    return {
-      nav: nav
-    }
-  },
   components: {
     UiIcon
   },
@@ -55,7 +49,8 @@ export default {
       currentLocale: 'getCurrentLocale',
       locales: 'getLocales',
       transitionName: 'getTransitionName',
-      transitionNames: 'getTransitionNames'
+      transitionNames: 'getTransitionNames',
+      nav: 'getNav'
     })
   },
   methods: {

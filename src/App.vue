@@ -5,6 +5,7 @@
         <ui-header></ui-header>
         <ui-nav></ui-nav>
         <ui-content>
+          <breadcrumbs></breadcrumbs>
           <transition
             :name="transitionName"
             :mode="transitionMode"
@@ -28,10 +29,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import UiLayout from './components/Ui/UiLayout'
-import UiHeader from './components/Ui/UiHeader'
-import UiNav from './components/Ui/UiNav'
-import UiContent from './components/Ui/UiContent'
+import { UiLayout, UiHeader, UiNav, UiContent } from './components/Ui'
 
 export default {
   name: 'app',
@@ -62,6 +60,7 @@ export default {
     }
   },
   updated () {
+    this.$refreshDocumentTitle()
     this.upgradeDom()
   },
   methods: {

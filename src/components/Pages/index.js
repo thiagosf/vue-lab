@@ -1,0 +1,6 @@
+export About from './About'
+export Home from './Home'
+export Login from './Login'
+export PageNotFound from './PageNotFound'
+export Register from './Register'
+export Table from './Table'

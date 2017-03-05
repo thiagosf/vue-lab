@@ -2,7 +2,7 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Vue</span>
     <nav class="mdl-navigation">
-      <router-link @click.native="hideNav" class="mdl-navigation__link" v-for="item in nav" :to="item.link">{{ item.label }}</router-link>
+      <router-link @click.native="hideNav" class="mdl-navigation__link" v-for="item in nav" :to="{ name: item.name }">{{ item.label }}</router-link>
       <hr>
       <a href="#" :class="{ 'mdl-navigation__link': true, 'language-item-mobile': true, 'active': item.active }" v-if="locales" v-for="item in locales" @click.prevent="setLocale(item.locale)">
         {{ item.name }}
@@ -16,20 +16,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import nav from '../../helpers/nav'
 
 export default {
   name: 'main-nav',
-  data () {
-    return {
-      nav: nav
-    }
-  },
   computed: {
     ...mapGetters({
       user: 'getUser',
       currentLocale: 'getCurrentLocale',
-      locales: 'getLocales'
+      locales: 'getLocales',
+      nav: 'getNav'
     })
   },
   methods: {

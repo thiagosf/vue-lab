@@ -83,6 +83,7 @@
 
 <script>
 export default {
-  name: 'table'
+  name: 'table',
+  title: 'Table'
 }
 </script>

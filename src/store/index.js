@@ -5,6 +5,7 @@ import newsletter from './modules/newsletter'
 import notification from './modules/notification'
 import i18n from './modules/i18n'
 import transition from './modules/transition'
+import nav from './modules/nav'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     newsletter,
     notification,
     i18n,
-    transition
+    transition,
+    nav
   ]
 })
