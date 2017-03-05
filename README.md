@@ -4,7 +4,7 @@
 
 ## Demonstração
 
-[https://thiagosf.github.io/vue-lab](https://thiagosf.github.io/vue-lab)
+[https://vue-lab.thiagosf.net](https://vue-lab.thiagosf.net)
 
 ## Suba o ambiente
 
