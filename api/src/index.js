@@ -5,6 +5,13 @@ import bodyParser from 'body-parser'
 
 const app = express()
 
+if (process.env.NODE_ENV == 'production') {
+  const port = process.env.PORT || 3000
+  app.listen(port, function() {
+    console.log(arguments);
+  })
+}
+
 app.use(cors())
 app.options('*', cors())
 app.use(bodyParser.urlencoded({ extended: false }))
