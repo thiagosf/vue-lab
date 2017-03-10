@@ -1,17 +1,15 @@
 import * as types from './mutation-types'
 
 const state = {
-  newsletter: {
-    name: null,
-    email: null
-  }
+  name: null,
+  email: null
 }
 
 const getters = {
   getNewsletter: (state) => {
     return {
-      name: state.newsletter.name,
-      email: state.newsletter.email
+      name: state.name,
+      email: state.email
     }
   }
 }
@@ -24,8 +22,8 @@ const actions = {
 
 const mutations = {
   [types.SEND_NEWSLETTER] (state, { name, email }) {
-    state.newsletter.name = name
-    state.newsletter.email = email
+    state.name = name
+    state.email = email
   }
 }
 

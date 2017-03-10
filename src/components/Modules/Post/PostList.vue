@@ -1,26 +1,26 @@
 <template>
   <div class="post-list">
-    <router-link :to="{ name: 'new-post' }">
+    <router-link :to="{ name: 'new-post' }" class="floating-button">
       <ui-button icon="add" type="button" primary fab big-icon></ui-button>
     </router-link>
-    <ui-grid :records="getPosts()" :actions="getActions()"></ui-grid>
+    <ui-grid :fields="fields" :records="posts" :actions="actions"></ui-grid>
   </div>
 </template>
 
 <script>
 import { UiGrid, UiButton } from '../../Ui'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'post',
   title: 'Posts',
   components: { UiGrid, UiButton },
-  methods: {
-    getPosts () {
-      return [{
-        id: 1,
-        title: 'lalal'
-      }]
-    },
-    getActions () {
+  computed: {
+    ...mapGetters({
+      posts: 'getPosts',
+      fields: 'getPostFields'
+    }),
+    actions () {
       return [
         {
           icon: 'create',
@@ -38,6 +38,9 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.$store.dispatch('getPosts')
   }
 }
 </script>

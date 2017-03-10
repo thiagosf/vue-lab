@@ -22,5 +22,59 @@
       "password": "123",
       "token": "a1s2d3f4"
     }
+  },
+  "GET /posts": {
+    "success": true,
+    "message": "Posts retornados com sucesso",
+    "data": [{
+      "id": "1",
+      "title": "Vue.js: a revolução",
+      "created_at": "2017-03-09 21:20:47"
+    }, {
+      "id": "2",
+      "title": "React vs Vue.js: a batalha final",
+      "created_at": "2017-03-09 22:17:30"
+    }, {
+      "id": "3",
+      "title": "SEO com SPA, é possível?",
+      "created_at": "2017-03-09 22:57:03"
+    }],
+    "paging": {
+      "limit": 10,
+      "page": 1,
+      "pages": 5,
+      "total": 50
+    }
+  },
+  "GET /posts/:id": {
+    "success": true,
+    "message": "Post retornado com sucesso",
+    "data": {
+      "id": "1",
+      "title": "Vue.js: a revolução",
+      "created_at": "2017-03-09 21:20:47"
+    }
+  },
+  "POST /posts": {
+    "success": true,
+    "message": "Posts criado com sucesso",
+    "data": {
+      "id": "4",
+      "title": "Uma nova era",
+      "created_at": "2017-03-09 23:09:09"
+    }
+  },
+  "POST /posts/:id/update": {
+    "success": true,
+    "message": "Posts autalizado com sucesso",
+    "data": {
+      "id": "4",
+      "title": "Uma nova era",
+      "created_at": "2017-03-09 23:09:09"
+    }
+  },
+  "DELETE /posts/:id": {
+    "success": true,
+    "message": "Posts removido com sucesso"
   }
 }

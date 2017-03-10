@@ -3,13 +3,13 @@
     <table :class="tableCssClasses">
       <thead>
         <tr>
-          <th v-for="item in head" :class="getThClass(item)">{{ item.label }}</th>
+          <th v-for="item in fields" :class="getThClass(item)">{{ item.label }}</th>
           <th v-if="actions"></th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="rows in content">
-          <td v-for="item in rows" :class="getTdClass(item)">{{ item.value }}</td>
+        <tr v-for="rows in records">
+          <td v-for="value in itemsRow(rows)" :class="getTdClass()">{{ value }}</td>
           <td class="td-actions" v-if="actions">
             <ui-button v-for="item in actions" :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored @click="item.handleClick"></ui-button>
           </td>
@@ -21,12 +21,15 @@
 
 <script>
 import UiButton from './UiButton'
+import uiComponent from '../Mixins/uiComponent'
 
 export default {
   name: 'ui-grid',
+  mixins: [uiComponent],
   components: { UiButton },
   props: {
     records: { type: Array, required: true },
+    fields: { type: Array, required: true },
     actions: { type: Array },
     selectable: { type: Boolean, default: true },
     shadow: { type: Boolean, default: true },
@@ -79,7 +82,7 @@ export default {
         desc: item.sort === 'desc'
       })
     },
-    getTdClass (item) {
+    getTdClass (item = {}) {
       return this.tdClass({
         string: item.type === 'string' || !item.type
       })
@@ -95,6 +98,14 @@ export default {
         'mdl-data-table__header--sorted-ascending': item.asc,
         'mdl-data-table__header--sorted-descending': item.desc
       }
+    },
+    itemsRow (row) {
+      let output = []
+      for (let i in this.fields) {
+        let field = this.fields[i]
+        output.push(row[field.field])
+      }
+      return output
     }
   }
 }
