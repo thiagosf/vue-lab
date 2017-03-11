@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import { eventManager } from '../../helpers'
 import * as types from './mutation-types'
 
 const state = {
@@ -31,7 +30,6 @@ const actions = {
         if (response.body.success) {
           let user = response.body.data
           commit(types.LOGIN, user)
-          eventManager.emit('login', user)
           return user
         } else {
           throw new Error(response.body.message)
@@ -47,7 +45,7 @@ const actions = {
           if (response.body.success) {
             let user = response.body.data
             commit(types.SUCCESS_TOKEN, user)
-            eventManager.emit('login', user)
+            return user
           } else {
             commit(types.INVALID_TOKEN)
           }

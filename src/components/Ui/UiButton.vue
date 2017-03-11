@@ -4,14 +4,17 @@
     <slot>
       <i class="material-icons" v-if="isIconSpecified" >{{ icon }}</i>
     </slot>
+    <ui-spinner singleColor v-if="spinner"></ui-spinner>
   </button>
 </template>
 
 <script>
-import uiComponent from '../Mixins/uiComponent'
+import { uiComponent } from '../Mixins'
+import UiSpinner from './UiSpinner'
 export default {
   name: 'ui-button',
   mixins: [uiComponent],
+  components: { UiSpinner },
   computed: {
     cssClasses () {
       return {
@@ -24,7 +27,8 @@ export default {
         'mdl-button--raised': this.raised,
         'mdl-button--colored': this.colored,
         'mdl-js-button': this.js,
-        'mdl-js-ripple-effect': this.ripple
+        'mdl-js-ripple-effect': this.ripple,
+        'button-with-spinner': this.spinner
       }
     },
     isIconSpecified () {
@@ -47,7 +51,8 @@ export default {
     raised: Boolean,
     colored: Boolean,
     js: { type: Boolean, default: true },
-    ripple: { type: Boolean, default: true }
+    ripple: { type: Boolean, default: true },
+    spinner: { type: Boolean, default: false }
   }
 }
 </script>

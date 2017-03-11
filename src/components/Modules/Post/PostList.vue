@@ -23,19 +23,20 @@ export default {
       fields: 'getPostFields'
     }),
     actions () {
+      const self = this
       return [
         {
           icon: 'create',
           primary: true,
-          handleClick: function (rows) {
-            console.log(rows)
+          handleClick (row) {
+            self.$router.push({ name: 'edit-post', params: { id: row.id } })
           }
         },
         {
           icon: 'delete',
           danger: true,
-          handleClick: function (rows) {
-            console.log(rows)
+          handleClick (row) {
+            console.log(row)
           }
         }
       ]

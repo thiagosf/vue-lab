@@ -80,12 +80,13 @@
     "data": {
       "id": "1",
       "title": "Vue.js: a revolução",
+      "body": "*Uma* nova onda chegou, e agora vai ser difícil contê-la.",
       "created_at": "2017-03-09 21:20:47"
     }
   },
   "POST /posts": {
     "success": true,
-    "message": "Posts criado com sucesso",
+    "message": "Post criado com sucesso",
     "data": {
       "id": "4",
       "title": "Uma nova era",
@@ -94,7 +95,7 @@
   },
   "POST /posts/:id/update": {
     "success": true,
-    "message": "Posts autalizado com sucesso",
+    "message": "Post autalizado com sucesso",
     "data": {
       "id": "4",
       "title": "Uma nova era",
@@ -103,6 +104,6 @@
   },
   "DELETE /posts/:id": {
     "success": true,
-    "message": "Posts removido com sucesso"
+    "message": "Post removido com sucesso"
   }
 }

@@ -1,11 +1,12 @@
 <template>
   <div :class="cssClasses">
     <slot></slot>
+    <span v-if="help" class="mdl-textfield__error">{{ help }}</span>
   </div>
 </template>
 
 <script>
-import uiComponent from '../Mixins/uiComponent'
+import { uiComponent } from '../Mixins'
 export default {
   name: 'ui-field-group',
   mixins: [uiComponent],
@@ -27,7 +28,8 @@ export default {
     floating: { type: Boolean, default: true },
     full: { type: Boolean, default: true },
     invalid: Boolean,
-    value: String
+    value: String,
+    help: String
   }
 }
 </script>

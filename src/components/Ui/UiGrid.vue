@@ -8,10 +8,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="rows in records">
-          <td v-for="value in itemsRow(rows)" :class="getTdClass()">{{ value }}</td>
+        <tr v-for="row in records">
+          <td v-for="value in itemsRow(row)" :class="getTdClass()">{{ value }}</td>
           <td class="td-actions" v-if="actions">
-            <ui-button v-for="item in actions" :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored @click="item.handleClick"></ui-button>
+            <span v-for="item in actions" @click="item.handleClick(row)">
+              <ui-button :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
+            </span>
           </td>
         </tr>
       </tbody>
@@ -23,7 +25,7 @@
 <script>
 import UiButton from './UiButton'
 import UiSpinner from './UiSpinner'
-import uiComponent from '../Mixins/uiComponent'
+import { uiComponent } from '../Mixins'
 
 export default {
   name: 'ui-grid',

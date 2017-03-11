@@ -14,5 +14,10 @@
       "title": "Login",
       "tip": "Tip <code>admin:123</code>"
     }
+  },
+  "modules": {
+    "posts": {
+      "new": "New post"
+    }
   }
 }

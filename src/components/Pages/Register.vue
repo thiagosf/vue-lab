@@ -13,7 +13,7 @@
               <ui-text type="email" name="email" v-model="email" :value="newsletter.email"></ui-text>
               <ui-label>E-mail</ui-label>
             </ui-field-group>
-            <div class="submit-box">
+            <div class="newsletter-submit-box">
               <ui-button with-icon="send" colored raised :disabled="disabled">Enviar</ui-button>
             </div>
           </form>
@@ -111,7 +111,7 @@ export default {
     @media (min-width: 480px)
       margin: 0 auto
       width: 400px
-    .submit-box
+    .newsletter-submit-box
       text-align: center
 
 // flipper

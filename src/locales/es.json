@@ -14,5 +14,10 @@
       "title": "Conecte",
       "tip": "Punta <code>admin:123</code>"
     }
+  },
+  "modules": {
+    "posts": {
+      "new": "Nuovo post"
+    }
   }
 }

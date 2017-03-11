@@ -1,7 +1,8 @@
 {
   "welcome": "Bem-vindo <strong>%{name}</strong>",
   "actions": {
-    "enter": "Entrar"
+    "enter": "Entrar",
+    "save": "Salvar"
   },
   "models": {
     "user": {
@@ -13,6 +14,22 @@
     "login": {
       "title": "Entrar",
       "tip": "Dica <code>admin:123</code>"
+    }
+  },
+  "modules": {
+    "posts": {
+      "new": "Nova postagem",
+      "edit": "Editar postagem",
+      "fields": {
+        "created_at": "Data de publicação",
+        "title": "Título",
+        "body": "Texto"
+      },
+      "help": {
+        "created_at": "Digite a data de publicação",
+        "title": "Digite um título",
+        "body": "Digite o texto"
+      }
     }
   }
 }

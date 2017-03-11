@@ -23,9 +23,8 @@ export const TRANSITION_MODE = `${prefix}/TRANSITION_MODE`
 export const SET_BREADCRUMB = `${prefix}/SET_BREADCRUMB`
 
 // Posts
-export const SET_POST_READY = `${prefix}/SET_POST_READY`
 export const SET_POSTS = `${prefix}/SET_POSTS`
 export const SET_POST = `${prefix}/SET_POST`
 export const CREATED_POST = `${prefix}/CREATED_POST`
 export const UPDATED_POST = `${prefix}/UPDATED_POST`
-export const DELETED_POST = `${prefix}/DELETED_POST`
+export const CLEAN_POST = `${prefix}/CLEAN_POST`

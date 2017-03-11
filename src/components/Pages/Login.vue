@@ -77,6 +77,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'getUser',
+      loggedIn: 'loggedIn',
       currentLocale: 'getCurrentLocale',
       locales: 'getLocales'
     })
@@ -98,6 +99,28 @@ export default {
     },
     setLocale (locale) {
       this.$store.dispatch('setLocale', locale)
+    },
+    checkLogged () {
+      this.ready = false
+      if (this.loggedIn) {
+        this.redirectLoggedUser()
+      } else {
+        this.ready = true
+      }
+    },
+    redirectLoggedUser () {
+      let params = null
+      if (this.$route.query.params) {
+        try {
+          params = JSON.parse(this.$route.query.params)
+        } catch (error) {
+          params = null
+        }
+      }
+      this.$router.push({
+        name: this.$route.query.redirect || 'home',
+        params: params
+      })
     }
   },
   data () {
@@ -111,11 +134,11 @@ export default {
     }
   },
   mounted () {
-    this.ready = false
-    if (this.user.id) {
-      this.$router.push({ name: 'home' })
-    } else {
-      this.ready = true
+    this.checkLogged()
+  },
+  updated () {
+    if (this.loggedIn) {
+      this.redirectLoggedUser()
     }
   }
 }

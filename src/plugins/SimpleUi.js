@@ -9,6 +9,22 @@ const SimpleUi = {
       computed: {
         cssClasses () {
           return {
+            'main-title': true,
+            'title-with-icon': this.icon
+          }
+        }
+      },
+      props: {
+        icon: String
+      }
+    })
+    Vue.component('ui-second-title', {
+      template: '<h2 :class="cssClasses"><span><ui-icon v-if="icon" rounded size="48" :name="icon" /> <slot></slot></span></h2>',
+      components: { UiIcon },
+      computed: {
+        cssClasses () {
+          return {
+            'second-title': true,
             'title-with-icon': this.icon
           }
         }

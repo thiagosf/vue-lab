@@ -47,13 +47,6 @@ export default {
       transitionMode: 'getTransitionMode'
     })
   },
-  created () {
-    this.$on('login', (user) => {
-      this.$router.push({
-        name: this.$route.query.redirect || 'home'
-      })
-    })
-  },
   mounted () {
     if (!this.loggedIn) {
       this.checkLogin()
@@ -72,6 +65,7 @@ export default {
     },
     enter (el) {
       this.upgradeDom()
+      document.querySelector('.mdl-layout__content').scrollTop = 0
     },
     upgradeDom () {
       window.componentHandler.upgradeDom()

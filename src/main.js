@@ -12,6 +12,7 @@ import store from './store'
 import SimpleUi from './plugins/SimpleUi'
 import Breadcrumbs from './plugins/Breadcrumbs'
 import DocumentTitle from './plugins/DocumentTitle'
+import Bus from './plugins/Bus'
 
 Vue.use(VueRouter)
 Vue.use(SimpleUi)
@@ -22,6 +23,7 @@ Vue.use(DocumentTitle, {
   mainTitle: 'vue-lab',
   separator: ` ${String.fromCharCode('9749')} `
 })
+Vue.use(Bus)
 
 i18n.install()
 
@@ -104,7 +106,7 @@ router.beforeEach((to, from, next) => {
     if (!store.getters.loggedIn) {
       next({
         name: 'login',
-        query: { redirect: to.name }
+        query: { redirect: to.name, params: JSON.stringify(to.params) }
       })
     } else {
       next()

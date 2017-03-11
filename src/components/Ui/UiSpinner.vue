@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import uiComponent from '../Mixins/uiComponent'
+import { uiComponent } from '../Mixins'
 export default {
   name: 'ui-spinner',
   mixins: [uiComponent],
@@ -14,7 +14,8 @@ export default {
       return {
         'mdl-spinner ': true,
         'mdl-js-spinner': true,
-        'is-active': true
+        'is-active': true,
+        'mdl-spinner--single-color': this.singleColor
       }
     },
     cssBoxClasses () {
@@ -25,7 +26,8 @@ export default {
     }
   },
   props: {
-    center: { type: Boolean, default: false }
+    center: { type: Boolean, default: false },
+    singleColor: { type: Boolean, default: false }
   }
 }
 </script>
