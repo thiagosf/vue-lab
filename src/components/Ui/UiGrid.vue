@@ -1,6 +1,6 @@
 <template>
   <div class="mdl-responsive-table-box">
-    <table :class="tableCssClasses">
+    <table :class="tableCssClasses" v-if="hasRecords()">
       <thead>
         <tr>
           <th v-for="item in fields" :class="getThClass(item)">{{ item.label }}</th>
@@ -16,17 +16,19 @@
         </tr>
       </tbody>
     </table>
+    <ui-spinner center v-if="!hasRecords()"></ui-spinner>
   </div>
 </template>
 
 <script>
 import UiButton from './UiButton'
+import UiSpinner from './UiSpinner'
 import uiComponent from '../Mixins/uiComponent'
 
 export default {
   name: 'ui-grid',
   mixins: [uiComponent],
-  components: { UiButton },
+  components: { UiButton, UiSpinner },
   props: {
     records: { type: Array, required: true },
     fields: { type: Array, required: true },
@@ -106,7 +108,13 @@ export default {
         output.push(row[field.field])
       }
       return output
+    },
+    hasRecords () {
+      return this.records.length > 0
     }
+  },
+  updated () {
+    window.componentHandler.upgradeDom()
   }
 }
 </script>

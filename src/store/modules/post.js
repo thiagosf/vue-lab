@@ -93,6 +93,9 @@ const actions = {
 
 const mutations = {
   [types.SET_POST_READY] (state, ready) {
+    state.posts = []
+    state.paging = {}
+    state.post = {}
     state.ready = ready
   },
   [types.SET_POSTS] (state, response) {

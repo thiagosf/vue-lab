@@ -5,12 +5,6 @@ $scale-in: .07
 $scale-out: .07
 
 // Fade
-.fade-enter-active,
-.fade-leave-active,
-.fade-enter,
-.fade-leave
-  transition: $transition-settings
-
 .fade-leave,
 .fade-enter-active
   opacity: 1
@@ -19,12 +13,6 @@ $scale-out: .07
   opacity: 0
 
 // Fade-left
-.fade-left-enter-active,
-.fade-left-leave-active,
-.fade-left-enter,
-.fade-left-leave
-  transition: $transition-settings
-
 .fade-left-leave
   opacity: 1
   transform: translateX(0px)
@@ -39,12 +27,6 @@ $scale-out: .07
   transform: translateX(0px)
 
 // Fade-right
-.fade-right-enter-active,
-.fade-right-leave-active,
-.fade-right-enter,
-.fade-right-leave
-  transition: $transition-settings
-
 .fade-right-leave
   opacity: 1
   transform: translateX(0px)
@@ -59,12 +41,6 @@ $scale-out: .07
   transform: translateX(0px)
 
 // Scale in
-.scale-in-enter,
-.scale-in-enter-active,
-.scale-in-leave,
-.scale-in-leave-active
-  transition: $transition-settings
-
 .scale-in-enter
   opacity: 0
   transform: scale(1 - $scale-in)
@@ -79,12 +55,6 @@ $scale-out: .07
   transform: scale(1 + $scale-in)
 
 // Scale-out
-.scale-out-enter,
-.scale-out-enter-active,
-.scale-out-leave,
-.scale-out-leave-active
-  transition: $transition-settings
-
 .scale-out-enter
   opacity: 0
   transform: scale(1 + $scale-out)
@@ -97,3 +67,39 @@ $scale-out: .07
 .scale-out-leave-active
   opacity: 0
   transform: scale(1 - $scale-out)
+
+// Common
+.hidden-on-transition
+  transition: all 300ms 100ms $easeOutBack
+  transform: scale(1)
+  opacity: 1
+
+.fade-enter,
+.fade-enter-active,
+.fade-left-enter,
+.fade-left-enter-active,
+.fade-right-enter,
+.fade-right-enter-active,
+.scale-in-enter,
+.scale-in-enter-active,
+.scale-out-enter,
+.scale-out-enter-active
+  transition: $transition-settings
+  .hidden-on-transition
+    opacity: 0
+    transform: scale(.5)
+
+.fade-leave,
+.fade-leave-active,
+.fade-left-leave,
+.fade-left-leave-active,
+.fade-right-leave,
+.fade-right-leave-active,
+.scale-in-leave,
+.scale-in-leave-active,
+.scale-out-leave,
+.scale-out-leave-active
+  transition: $transition-settings
+  .hidden-on-transition
+    transition: none
+    opacity: 0
