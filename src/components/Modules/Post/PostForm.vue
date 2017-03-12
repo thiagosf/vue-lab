@@ -9,10 +9,18 @@
         <ui-text name="title" v-model="title" required></ui-text>
         <ui-label>{{$t('modules.posts.fields.title')}}</ui-label>
       </ui-field-group>
-      <ui-field-group :help="$t('modules.posts.help.body')">
-        <ui-text-area name="body" v-model="body" required></ui-text-area>
-        <ui-label>{{$t('modules.posts.fields.body')}}</ui-label>
-      </ui-field-group>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--6-col">
+          <ui-field-group :help="$t('modules.posts.help.body')">
+            <ui-text-area name="body" v-model="body" required></ui-text-area>
+            <ui-label>{{$t('modules.posts.fields.body')}}</ui-label>
+          </ui-field-group>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+          <small>Preview</small>
+          <div class="markdown-preview" v-html="compiledMarkdown"></div>
+        </div>
+      </div>
       <div class="submit-box">
         <ui-button :disabled="sending" spinner type="submit" raised primary>
           {{$t('actions.save')}}
@@ -24,15 +32,18 @@
 
 <script>
 import moment from 'moment'
+import marked from 'marked'
 import { UiFieldGroup, UiLabel, UiText, UiTextArea, UiButton } from '../../Ui'
 import { toast } from '../../../helpers'
+import converter from './converter'
 
 export default {
   name: 'post-form',
   components: { UiFieldGroup, UiLabel, UiText, UiTextArea, UiButton },
   props: {
     record: Object,
-    type: { type: String, default: 'create' }
+    type: { type: String, default: 'create' },
+    converter: Function
   },
   data () {
     return {
@@ -40,6 +51,11 @@ export default {
       created_at: moment().format('DD/MM/YYYY'),
       body: null,
       sending: false
+    }
+  },
+  computed: {
+    compiledMarkdown () {
+      return marked(this.body, { sanitize: true })
     }
   },
   methods: {
@@ -78,7 +94,7 @@ export default {
   created () {
     if (this.record) {
       for (let i in this.record) {
-        this[i] = this.record[i]
+        this[i] = converter(i, this.record[i])
       }
     }
   }

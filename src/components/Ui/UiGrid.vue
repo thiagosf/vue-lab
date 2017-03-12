@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr v-for="row in records">
-          <td v-for="value in itemsRow(row)" :class="getTdClass()">{{ value }}</td>
+          <td v-for="(value, field) in itemsRow(row)" :class="getTdClass()" >{{ getRowValue(field, value) }}</td>
           <td class="td-actions" v-if="actions">
             <span v-for="item in actions" @click="item.handleClick(row)">
               <ui-button :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
@@ -39,34 +39,10 @@ export default {
     shadow: { type: Boolean, default: true },
     dataTable: { type: Boolean, default: true },
     fluid: { type: Boolean, default: true },
-    breakWord: { type: Boolean, default: true }
+    breakWord: { type: Boolean, default: true },
+    converter: { type: Function }
   },
   computed: {
-    content: function () {
-      return [
-        [
-          { value: 1, type: 'number' },
-          { value: 'Um titulo' },
-          { value: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' }
-        ],
-        [
-          { value: 2, type: 'number' },
-          { value: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-          { value: '50' }
-        ]
-      ]
-    },
-    head: function () {
-      return [{
-        label: 'ID',
-        type: 'number',
-        sort: 'desc'
-      }, {
-        label: 'Title'
-      }, {
-        label: 'Unit'
-      }]
-    },
     tableCssClasses () {
       return {
         'mdl-data-table': this.dataTable,
@@ -104,19 +80,25 @@ export default {
       }
     },
     itemsRow (row) {
-      let output = []
+      let output = {}
       for (let i in this.fields) {
-        let field = this.fields[i]
-        output.push(row[field.field])
+        let item = this.fields[i]
+        output[item.field] = row[item.field]
       }
       return output
     },
     hasRecords () {
       return this.records.length > 0
+    },
+    getRowValue (field, value) {
+      if (this.converter) {
+        return this.converter(field, value)
+      }
+      return value
     }
   },
   updated () {
-    window.componentHandler.upgradeDom()
+    this.$upgradeDom()
   }
 }
 </script>

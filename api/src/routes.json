@@ -80,7 +80,7 @@
     "data": {
       "id": "1",
       "title": "Vue.js: a revolução",
-      "body": "*Uma* nova onda chegou, e agora vai ser difícil contê-la.",
+      "body": "### Vue.js\n\n**Uma** nova onda chegou, e `agora` vai ser _difícil_ contê-la.",
       "created_at": "2017-03-09 21:20:47"
     }
   },

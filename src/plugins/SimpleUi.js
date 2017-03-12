@@ -43,6 +43,9 @@ const SimpleUi = {
     Vue.prototype.$upgradeDom = function () {
       window.componentHandler.upgradeDom()
     }
+    Vue.prototype.$upgradeElement = function () {
+      window.componentHandler.upgradeElement(this.$el)
+    }
   }
 }
 

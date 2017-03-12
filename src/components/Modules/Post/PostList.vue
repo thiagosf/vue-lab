@@ -5,13 +5,14 @@
         <ui-button icon="add" type="button" primary fab big-icon></ui-button>
       </router-link>
     </ui-floating-box>
-    <ui-grid :fields="fields" :records="posts" :actions="actions"></ui-grid>
+    <ui-grid :fields="fields" :records="posts" :actions="actions" :converter="converter"></ui-grid>
   </div>
 </template>
 
 <script>
-import { UiGrid, UiButton, UiFloatingBox } from '../../Ui'
 import { mapGetters } from 'vuex'
+import { UiGrid, UiButton, UiFloatingBox } from '../../Ui'
+import converter from './converter'
 
 export default {
   name: 'post',
@@ -24,25 +25,27 @@ export default {
     }),
     actions () {
       const self = this
-      return [
-        {
-          icon: 'create',
-          primary: true,
-          handleClick (row) {
-            self.$router.push({ name: 'edit-post', params: { id: row.id } })
-          }
-        },
-        {
-          icon: 'delete',
-          danger: true,
-          handleClick (row) {
-            console.log(row)
-          }
+      return [{
+        icon: 'create',
+        primary: true,
+        handleClick (row) {
+          self.$router.push({ name: 'edit-post', params: { id: row.id } })
         }
-      ]
+      }, {
+        icon: 'delete',
+        danger: true,
+        handleClick (row) {
+          console.log(row)
+        }
+      }]
     }
   },
-  mounted () {
+  data () {
+    return {
+      converter
+    }
+  },
+  created () {
     this.$store.dispatch('getPosts')
   }
 }

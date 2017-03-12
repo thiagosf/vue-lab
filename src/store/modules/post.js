@@ -26,6 +26,9 @@ const getters = {
   },
   getPostFields (state) {
     return state.fields
+  },
+  getPostConverters (state) {
+    return state.converters
   }
 }
 

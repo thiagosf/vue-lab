@@ -6,6 +6,7 @@
     :rows="rows"
     v-bind:value="value"
     v-on:input="updateValue($event.target.value)"
+    v-bind:style="styles"
     >
     {{value}}
   </textarea>
@@ -21,6 +22,11 @@ export default {
       return {
         'mdl-textfield__input': this.simple
       }
+    },
+    styles () {
+      return {
+        resize: this.resize ? 'both' : 'none'
+      }
     }
   },
   props: {
@@ -28,7 +34,8 @@ export default {
     name: String,
     value: String,
     simple: { type: Boolean, default: true },
-    rows: { type: Number, default: 5 }
+    rows: { type: Number, default: 5 },
+    resize: { type: Boolean, default: false }
   },
   created () {
     this.updateValue(this.value)
