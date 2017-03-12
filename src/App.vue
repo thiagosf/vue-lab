@@ -9,7 +9,7 @@
           <transition
             :name="transitionName"
             :mode="transitionMode"
-            v-on:enter="enter"
+            v-on:enter="$defaultEnterTransition"
             >
             <router-view></router-view>
           </transition>
@@ -54,7 +54,7 @@ export default {
   },
   updated () {
     this.$refreshDocumentTitle()
-    this.upgradeDom()
+    this.$upgradeDom()
   },
   methods: {
     isLoginRoute () {
@@ -62,13 +62,6 @@ export default {
     },
     checkLogin () {
       this.$store.dispatch('checkLogin')
-    },
-    enter (el) {
-      this.upgradeDom()
-      document.querySelector('.mdl-layout__content').scrollTop = 0
-    },
-    upgradeDom () {
-      window.componentHandler.upgradeDom()
     }
   }
 }

@@ -3,6 +3,7 @@ import UiIcon from '../components/Ui/UiIcon'
 const SimpleUi = {
   version: '1.0.0',
   install: function (Vue, options) {
+    // Components
     Vue.component('ui-title', {
       template: '<h1 :class="cssClasses"><ui-icon v-if="icon" rounded size="48" :name="icon" /> <slot></slot></h1>',
       components: { UiIcon },
@@ -33,6 +34,15 @@ const SimpleUi = {
         icon: String
       }
     })
+
+    // Methods
+    Vue.prototype.$defaultEnterTransition = function () {
+      document.querySelector('.mdl-layout__content').scrollTop = 0
+      Vue.prototype.$upgradeDom()
+    }
+    Vue.prototype.$upgradeDom = function () {
+      window.componentHandler.upgradeDom()
+    }
   }
 }
 

@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
 })
 
 export default {
-  show (message, type = 'success', timeout = 2000) {
+  show (message, type = 'success', timeout = 4000) {
     message = message.replace(/(<([^>]+)>)/ig, '')
     let snackbar = document.querySelector('#snackbar-message')
     if (snackbar.MaterialSnackbar) {

@@ -4,7 +4,7 @@
     <transition
       :name="transitionName"
       :mode="transitionMode"
-      v-on:enter="enter"
+      v-on:enter="$defaultEnterTransition"
       >
       <router-view></router-view>
     </transition>
@@ -23,14 +23,6 @@ export default {
       transitionName: 'getTransitionName',
       transitionMode: 'getTransitionMode'
     })
-  },
-  methods: {
-    enter (el) {
-      this.upgradeDom()
-    },
-    upgradeDom () {
-      window.componentHandler.upgradeDom()
-    }
   }
 }
 </script>
