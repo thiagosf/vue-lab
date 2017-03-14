@@ -28,3 +28,5 @@ export const SET_POST = `${prefix}/SET_POST`
 export const CREATED_POST = `${prefix}/CREATED_POST`
 export const UPDATED_POST = `${prefix}/UPDATED_POST`
 export const CLEAN_POST = `${prefix}/CLEAN_POST`
+export const CLEAN_POSTS = `${prefix}/CLEAN_POSTS`
+export const POST_PAGINATE = `post/PAGINATE`

@@ -14,7 +14,8 @@ const state = {
   }, {
     label: 'Data de publicação',
     field: 'created_at'
-  }]
+  }],
+  page: 1
 }
 
 const getters = {
@@ -29,12 +30,19 @@ const getters = {
   },
   getPostConverters (state) {
     return state.converters
+  },
+  getPostPage (state) {
+    return state.page
+  },
+  getPostPaging (state) {
+    return state.paging
   }
 }
 
 const actions = {
-  getPosts ({ commit }) {
-    return Vue.http.get('posts')
+  getPosts ({ commit }, page = 1) {
+    commit(types.CLEAN_POSTS)
+    return Vue.http.get('posts', { params: { page: page } })
       .then((response) => {
         if (response.body.success) {
           commit(types.SET_POSTS, response.body)
@@ -106,6 +114,12 @@ const mutations = {
   },
   [types.CLEAN_POST] (state) {
     state.post = {}
+  },
+  [types.CLEAN_POSTS] (state) {
+    state.posts = []
+  },
+  [types.POST_PAGINATE] (state, page) {
+    state.page = page
   }
 }
 

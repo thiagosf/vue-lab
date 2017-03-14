@@ -3,6 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import VueCookie from 'vue-cookie'
+import { VuePagination } from 'vue-pagination-2'
 
 import i18n from './helpers/i18n'
 import App from './App'
@@ -24,6 +25,7 @@ Vue.use(DocumentTitle, {
   separator: ` ${String.fromCharCode('9749')} `
 })
 Vue.use(Bus)
+Vue.use(VuePagination, true)
 
 i18n.install()
 

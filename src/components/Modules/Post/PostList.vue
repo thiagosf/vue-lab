@@ -5,7 +5,16 @@
         <ui-button icon="add" type="button" primary fab big-icon></ui-button>
       </router-link>
     </ui-floating-box>
-    <ui-grid :fields="fields" :records="posts" :actions="actions" :converter="converter"></ui-grid>
+    <ui-grid
+      name="post"
+      :fields="fields"
+      :records="posts"
+      :actions="actions"
+      :converter="converter"
+      :paging="postPaging"
+      selectedsLabel="Remover selecionados"
+      v-on:selectedsAction="removeSelecteds"
+      ></ui-grid>
   </div>
 </template>
 
@@ -21,7 +30,9 @@ export default {
   computed: {
     ...mapGetters({
       posts: 'getPosts',
-      fields: 'getPostFields'
+      fields: 'getPostFields',
+      postPage: 'getPostPage',
+      postPaging: 'getPostPaging'
     }),
     actions () {
       const self = this
@@ -42,11 +53,23 @@ export default {
   },
   data () {
     return {
+      page: 1,
       converter
     }
   },
   created () {
-    this.$store.dispatch('getPosts')
+    this.$store.dispatch('getPosts', this.page)
+  },
+  updated () {
+    if (this.page !== this.postPage) {
+      this.page = this.postPage
+      this.$store.dispatch('getPosts', this.page)
+    }
+  },
+  methods: {
+    removeSelecteds (selecteds) {
+      console.log('selecteds', selecteds)
+    }
   }
 }
 </script>

@@ -1,37 +1,46 @@
 <template>
   <div class="mdl-responsive-table-box">
-    <table :class="tableCssClasses" v-if="hasRecords()">
-      <thead>
-        <tr>
-          <th v-for="item in fields" :class="getThClass(item)">{{ item.label }}</th>
-          <th v-if="actions"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="row in records">
-          <td v-for="(value, field) in itemsRow(row)" :class="getTdClass()" >{{ getRowValue(field, value) }}</td>
-          <td class="td-actions" v-if="actions">
-            <span v-for="item in actions" @click="item.handleClick(row)">
-              <ui-button :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-if="hasRecords()">
+      <table :class="tableCssClasses">
+        <thead>
+          <tr>
+            <th v-for="item in fields" :class="getThClass(item)">{{ item.label }}</th>
+            <th v-if="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr is="ui-grid-row" ref="row" v-for="(row, index) in records" :data-id="row.id" v-on:selectRow="updateSelecteds">
+            <td v-for="(value, field) in itemsRow(row)" :class="getTdClass()">{{ getRowValue(field, value) }}</td>
+            <td class="td-actions" v-if="actions">
+              <span v-for="item in actions" @click="item.handleClick(row)">
+                <ui-button :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="selectable">
+        <hr>
+        <ui-button primary raised colored @click.native="removeSelecteds" :disabled="!hasRowSelected">{{selectedsLabel}}</ui-button>
+      </div>
+    </div>
     <ui-spinner center v-if="!hasRecords()"></ui-spinner>
+    <pagination v-if="paging.pages" :for="name" :per-page="paging.limit" :records="paging.total" :chunk="10" count-text="Mostrando {from} a {to} de {count} registros|{count} registros|Um registro"></pagination>
   </div>
 </template>
 
 <script>
 import UiButton from './UiButton'
 import UiSpinner from './UiSpinner'
+import UiGridRow from './UiGridRow'
 import { uiComponent } from '../Mixins'
 
 export default {
   name: 'ui-grid',
   mixins: [uiComponent],
-  components: { UiButton, UiSpinner },
+  components: { UiButton, UiSpinner, UiGridRow },
   props: {
+    name: { type: String, required: true },
     records: { type: Array, required: true },
     fields: { type: Array, required: true },
     actions: { type: Array },
@@ -40,18 +49,28 @@ export default {
     dataTable: { type: Boolean, default: true },
     fluid: { type: Boolean, default: true },
     breakWord: { type: Boolean, default: true },
-    converter: { type: Function }
+    converter: Function,
+    selectedsLabel: String,
+    paging: { type: Object, default: {} },
+    chunk: { type: Number, default: 10 }
   },
   computed: {
     tableCssClasses () {
       return {
         'mdl-data-table': this.dataTable,
         'mdl-js-data-table': this.dataTable,
-        'mdl-data-table--selectable': this.selectable,
         'mdl-shadow--2dp': this.shadow,
         'table-fluid': this.fluid,
         'table-break-word': this.breakWord
       }
+    },
+    hasRowSelected () {
+      return this.selecteds.length > 0
+    }
+  },
+  data () {
+    return {
+      selecteds: []
     }
   },
   methods: {
@@ -95,6 +114,14 @@ export default {
         return this.converter(field, value)
       }
       return value
+    },
+    removeSelecteds () {
+      this.$emit('selectedsAction', this.selecteds)
+    },
+    updateSelecteds () {
+      this.selecteds = this.$refs.row.filter(item => item.isSelected()).map((item) => {
+        return parseInt(item.$el.dataset.id)
+      })
     }
   },
   updated () {

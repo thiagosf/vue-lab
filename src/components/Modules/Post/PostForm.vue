@@ -55,7 +55,9 @@ export default {
   },
   computed: {
     compiledMarkdown () {
-      return marked(this.body, { sanitize: true })
+      if (this.body) {
+        return marked(this.body, { sanitize: true })
+      }
     }
   },
   methods: {
