@@ -12,9 +12,7 @@
           <tr is="ui-grid-row" ref="row" v-for="(row, index) in records" :data-id="row.id" v-on:selectRow="updateSelecteds">
             <td v-for="(value, field) in itemsRow(row)" :class="getTdClass()">{{ getRowValue(field, value) }}</td>
             <td class="td-actions" v-if="actions">
-              <span v-for="item in actions" @click="item.handleClick(row)">
-                <ui-button :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
-              </span>
+              <ui-button v-for="item in actions" @click.native="item.handleClick(row)" :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
             </td>
           </tr>
         </tbody>

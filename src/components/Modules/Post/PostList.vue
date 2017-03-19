@@ -68,7 +68,12 @@ export default {
   },
   methods: {
     removeSelecteds (selecteds) {
-      console.log('selecteds', selecteds)
+      this.$bus.$emit('openDialogAction', {
+        text: 'Essa ação é irreversível. Quer continuar?',
+        onAccept: () => {
+          this.$store.dispatch('deletePosts', selecteds)
+        }
+      })
     }
   }
 }

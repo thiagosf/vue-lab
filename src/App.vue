@@ -19,6 +19,7 @@
           </div>
         </ui-content>
       </ui-layout>
+      <ui-dialog ref="mainDialog" />
     </div>
   </div>
 </template>
@@ -29,7 +30,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { UiLayout, UiHeader, UiNav, UiContent } from './components/Ui'
+import { UiLayout, UiHeader, UiNav, UiContent, UiDialog } from './components/Ui'
 
 export default {
   name: 'app',
@@ -37,7 +38,8 @@ export default {
     UiLayout,
     UiHeader,
     UiNav,
-    UiContent
+    UiContent,
+    UiDialog
   },
   computed: {
     ...mapGetters({
@@ -51,6 +53,9 @@ export default {
     if (!this.loggedIn) {
       this.checkLogin()
     }
+    this.$bus.$on('openDialogAction', (config) => {
+      this.$refs.mainDialog.open(config)
+    })
   },
   updated () {
     this.$refreshDocumentTitle()

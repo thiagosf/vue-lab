@@ -95,6 +95,16 @@ const actions = {
           throw new Error(response.body.message)
         }
       })
+  },
+  deletePosts ({ commit }, posts) {
+    return Vue.http.post(`posts/bulk-delete`, { posts: posts })
+      .then((response) => {
+        if (response.body.success) {
+          return response.body
+        } else {
+          throw new Error(response.body.message)
+        }
+      })
   }
 }
 
