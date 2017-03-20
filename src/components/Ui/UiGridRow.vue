@@ -12,6 +12,9 @@ export default {
       selected: false
     }
   },
+  props: {
+    selectable: false
+  },
   computed: {
     selectedRowClass () {
       return {
@@ -21,8 +24,10 @@ export default {
   },
   methods: {
     selectRow () {
-      this.selected = !this.selected
-      this.$emit('selectRow')
+      if (this.selectable) {
+        this.selected = !this.selected
+        this.$emit('selectRow')
+      }
     },
     isSelected () {
       return this.selected

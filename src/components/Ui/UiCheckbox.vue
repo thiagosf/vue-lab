@@ -30,6 +30,15 @@ export default {
   methods: {
     updateValue (value) {
       this.$emit('input', value)
+    },
+    check () {
+      this.$el.MaterialCheckbox.check()
+    },
+    uncheck () {
+      this.$el.MaterialCheckbox.uncheck()
+    },
+    isChecked () {
+      return this.$el.querySelector('input[type=checkbox]').checked
     }
   }
 }

@@ -24,5 +24,6 @@ Acesse em seu navegador `http://vue-lab.dev.azk.io/` e veja o experimento em aç
 - [x] Adicionar autenticação
 - [x] Usar ajax
 - [x] I18n
-- [ ] Criar módulos do admin fictícios
+- [x] Criar módulos do admin fictícios
+- [ ] Revisar textos não internacionalizados
 - [ ] Adicionar gráficos

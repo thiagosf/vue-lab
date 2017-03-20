@@ -14,7 +14,7 @@
         <tbody>
           <tr is="ui-grid-row" ref="row" v-for="(row, index) in records" :data-id="row.id">
             <td>
-              <ui-checkbox ref="checkbox-item" @change.native="updateSelecteds"></ui-checkbox>
+              <ui-checkbox name="checkbox-item" @change.native="updateSelecteds"></ui-checkbox>
             </td>
             <td v-for="(value, field) in itemsRow(row)" :class="getTdClass()">{{ getRowValue(field, value) }}</td>
             <td class="td-actions" v-if="actions">
@@ -126,16 +126,36 @@ export default {
     selectAll (e) {
       if (e.target.checked) {
         this.selecteds = this.$refs.row.map((item) => {
-          item.$el.querySelector('input[type=checkbox]').checked = true
+          for (let i in item.$children) {
+            let child = item.$children[i]
+            if (child.name === 'checkbox-item') {
+              child.check()
+            }
+          }
           return parseInt(item.$el.dataset.id)
         })
       } else {
         this.selecteds = []
+        this.$refs.row.map((item) => {
+          for (let i in item.$children) {
+            let child = item.$children[i]
+            if (child.name === 'checkbox-item') {
+              child.uncheck()
+            }
+          }
+        })
       }
     },
     updateSelecteds (e) {
       this.selecteds = this.$refs.row.filter((item) => {
-        return item.$el.querySelector('input[type=checkbox]').checked
+        let checked = false
+        for (let i in item.$children) {
+          let child = item.$children[i]
+          if (child.name === 'checkbox-item') {
+            checked = child.isChecked()
+          }
+        }
+        return checked
       }).map((item) => {
         return parseInt(item.$el.dataset.id)
       })
