@@ -12,7 +12,6 @@
       :actions="actions"
       :converter="converter"
       :paging="postPaging"
-      selectedsLabel="Remover selecionados"
       v-on:selectedsAction="removeSelecteds"
       ></ui-grid>
   </div>
@@ -46,7 +45,17 @@ export default {
         icon: 'delete',
         danger: true,
         handleClick (row) {
-          console.log(row)
+          self.$bus.$emit('openDialog', {
+            text: `<p>Essa ação é irreversível. Quer continuar?</p><p>Item a ser excluído: <strong>${row.title}</strong></p>`,
+            onAccept: (closeDialog) => {
+              self.$store.dispatch('deletePost', row.id).then((result) => {
+                if (result.success) {
+                  self.loadPosts(self.page)
+                }
+                closeDialog()
+              })
+            }
+          })
         }
       }]
     }
@@ -58,20 +67,35 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('getPosts', this.page)
+    this.loadPosts()
   },
   updated () {
     if (this.page !== this.postPage) {
       this.page = this.postPage
-      this.$store.dispatch('getPosts', this.page)
+      this.loadPosts(this.page)
     }
   },
   methods: {
+    loadPosts (page = 1) {
+      this.$store.dispatch('getPosts', page)
+    },
     removeSelecteds (selecteds) {
-      this.$bus.$emit('openDialogAction', {
-        text: 'Essa ação é irreversível. Quer continuar?',
-        onAccept: () => {
-          this.$store.dispatch('deletePosts', selecteds)
+      let items = []
+      for (let i in this.posts) {
+        let post = this.posts[i]
+        if (selecteds.indexOf(parseInt(post.id)) > -1) {
+          items.push(`<li>${post.title}</li>`)
+        }
+      }
+      this.$bus.$emit('openDialog', {
+        text: `<p>Essa ação é irreversível. Quer continuar?</p><p>Item(s) a ser(em) excluído(s):</p><ul>${items.join('')}</ul>`,
+        onAccept: (closeDialog) => {
+          this.$store.dispatch('deletePosts', selecteds).then((result) => {
+            if (result.success) {
+              this.loadPosts(this.page)
+            }
+            closeDialog()
+          })
         }
       })
     }

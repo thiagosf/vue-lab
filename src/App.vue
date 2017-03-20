@@ -53,7 +53,7 @@ export default {
     if (!this.loggedIn) {
       this.checkLogin()
     }
-    this.$bus.$on('openDialogAction', (config) => {
+    this.$bus.$on('openDialog', (config) => {
       this.$refs.mainDialog.open(config)
     })
   },

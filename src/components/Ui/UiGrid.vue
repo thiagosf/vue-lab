@@ -4,12 +4,18 @@
       <table :class="tableCssClasses">
         <thead>
           <tr>
+            <th v-if="selectable">
+              <ui-checkbox @change.native="selectAll"></ui-checkbox>
+            </th>
             <th v-for="item in fields" :class="getThClass(item)">{{ item.label }}</th>
             <th v-if="actions"></th>
           </tr>
         </thead>
         <tbody>
-          <tr is="ui-grid-row" ref="row" v-for="(row, index) in records" :data-id="row.id" v-on:selectRow="updateSelecteds">
+          <tr is="ui-grid-row" ref="row" v-for="(row, index) in records" :data-id="row.id">
+            <td>
+              <ui-checkbox ref="checkbox-item" @change.native="updateSelecteds"></ui-checkbox>
+            </td>
             <td v-for="(value, field) in itemsRow(row)" :class="getTdClass()">{{ getRowValue(field, value) }}</td>
             <td class="td-actions" v-if="actions">
               <ui-button v-for="item in actions" @click.native="item.handleClick(row)" :icon="item.icon" type="button" :primary="item.primary" :raised="item.raised" fab colored></ui-button>
@@ -31,12 +37,13 @@
 import UiButton from './UiButton'
 import UiSpinner from './UiSpinner'
 import UiGridRow from './UiGridRow'
+import UiCheckbox from './UiCheckbox'
 import { uiComponent } from '../Mixins'
 
 export default {
   name: 'ui-grid',
   mixins: [uiComponent],
-  components: { UiButton, UiSpinner, UiGridRow },
+  components: { UiButton, UiSpinner, UiGridRow, UiCheckbox },
   props: {
     name: { type: String, required: true },
     records: { type: Array, required: true },
@@ -48,7 +55,7 @@ export default {
     fluid: { type: Boolean, default: true },
     breakWord: { type: Boolean, default: true },
     converter: Function,
-    selectedsLabel: String,
+    selectedsLabel: { type: String, default: 'Remover selecionados' },
     paging: { type: Object, default: {} },
     chunk: { type: Number, default: 10 }
   },
@@ -116,8 +123,20 @@ export default {
     removeSelecteds () {
       this.$emit('selectedsAction', this.selecteds)
     },
-    updateSelecteds () {
-      this.selecteds = this.$refs.row.filter(item => item.isSelected()).map((item) => {
+    selectAll (e) {
+      if (e.target.checked) {
+        this.selecteds = this.$refs.row.map((item) => {
+          item.$el.querySelector('input[type=checkbox]').checked = true
+          return parseInt(item.$el.dataset.id)
+        })
+      } else {
+        this.selecteds = []
+      }
+    },
+    updateSelecteds (e) {
+      this.selecteds = this.$refs.row.filter((item) => {
+        return item.$el.querySelector('input[type=checkbox]').checked
+      }).map((item) => {
         return parseInt(item.$el.dataset.id)
       })
     }

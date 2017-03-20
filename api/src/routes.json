@@ -105,5 +105,9 @@
   "DELETE /posts/:id": {
     "success": true,
     "message": "Post removido com sucesso"
+  },
+  "POST /posts/bulk-delete": {
+    "success": true,
+    "message": "Posts removidos com sucesso"
   }
 }

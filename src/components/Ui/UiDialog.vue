@@ -3,8 +3,8 @@
     <h4 class="mdl-dialog__title" v-if="title">{{title}}</h4>
     <div class="mdl-dialog__content" v-if="text" v-html="text" />
     <div class="mdl-dialog__actions">
-      <ui-button raised primary v-if="onAccept" @click.native="accept">{{acceptText}}</ui-button>
-      <ui-button @click.native="close">{{cancelText}}</ui-button>
+      <ui-button raised primary :disabled="disabledAccept" v-if="onAccept" @click.native="accept">{{acceptText}}</ui-button>
+      <ui-button :disabled="disabledAccept" @click.native="close">{{cancelText}}</ui-button>
     </div>
   </dialog>
 </template>
@@ -31,7 +31,8 @@ export default {
       dialog: null,
       onAccept: null,
       acceptText: 'Sim',
-      cancelText: 'Cancelar'
+      cancelText: 'Cancelar',
+      disabledAccept: false
     }
   },
   mounted () {
@@ -42,6 +43,7 @@ export default {
   },
   methods: {
     open (config) {
+      this.reset()
       this.setConfig(config)
       this.dialog.showModal()
     },
@@ -54,10 +56,13 @@ export default {
       }
     },
     accept () {
+      this.disabledAccept = true
       if (typeof this.onAccept === 'function') {
-        this.onAccept()
+        this.onAccept(this.close)
       }
-      this.close()
+    },
+    reset () {
+      this.disabledAccept = false
     }
   }
 }

@@ -1,0 +1,22 @@
+dialog
+  top: 65px
+  opacity: 0
+  animation: enterDialog 300ms 100ms forwards
+  + .backdrop
+    background: rgba(black, .5)
+    opacity: 0
+    animation: enterBackdrop 200ms forwards
+
+@keyframes enterDialog
+  0%
+    opacity: 0
+    transform: scale(1.1)
+  100%
+    opacity: 1
+    transform: scale(1)
+
+@keyframes enterBackdrop
+  0%
+    opacity: 0
+  100%
+    opacity: 1
